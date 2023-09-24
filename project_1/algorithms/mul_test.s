@@ -7,7 +7,7 @@
 
 .section .data
     a: .word 0b0000000110000000
-    b: .word 0b0000001101000000
+    b: .word 0b1000001101000000
 
 .text
 _start:

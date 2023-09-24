@@ -1,7 +1,7 @@
 import subprocess
 import time
 
-file = "mul_test"
+file = "buffer"
 
 comp = ["arm-none-eabi-as", file+".s", "-g", "-o", file+".o"]
 link = ["arm-none-eabi-ld", file+".o", "-o", file]
