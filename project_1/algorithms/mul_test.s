@@ -32,11 +32,11 @@ _start:
     
     @ Multiply and shif a by c (high)
     mul r5, r1, r2
-    asr r5, r5, #8
+    lsl r5, r5, #8
     
     @ Multiply and shif b by d (low)
     mul r6, r3, r4
-    lsl r6, r6, #8
+    asr r6, r6, #8
     
     @ Multiply a by d (half mid)
     mul r7, r1, r4
