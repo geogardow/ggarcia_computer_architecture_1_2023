@@ -11,12 +11,12 @@ _start:
 	LDR R0, =buffer @ Load memory direction of the buffer
 	MOV R2, #0 @ compare with buffer size
 	MOV R3, #0 @ offset for reading
-	MOV R4, #5 @ value to write
+	MOV R4, #6 @ value to write
 	MOV R5, #0 @ buffer space
 
 _addElements:
 	CMP R5, #5
-	BEQ _seeElements
+	BEQ _giveSpace
 
 	LDR R1, =inPointer @ offset for writing and in pointer
 	LDR R6, [R1]   @ value for offset
@@ -27,6 +27,25 @@ _addElements:
 	SUB R4, R4, #1
 	ADD R5, R5, #1
 	
+	CMP R4, #0
+	BEQ _seeElements
+
+	B _addElements
+
+_giveSpace:
+	LDR R1, =outPointer
+	LDR R6, [R1]
+	MOV R10, #0
+	STR R10, [R0, R6]
+	ADD R6, R6, #4
+	STR R6, [R1]
+
+	LDR R1, =inPointer
+	LDR R6, [R1]
+	MOV R6, #0
+
+	SUB R5, R5, #1
+
 	B _addElements
 
 _seeElements:
@@ -36,6 +55,8 @@ _seeElements:
 	ADD R3, R3, #4
 	CMP R2, #5
 	BNE _seeElements
+
+	B _end
 
 _deleteElements:
 	CMP R5, #2  @ Empty buffer
