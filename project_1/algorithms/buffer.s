@@ -11,7 +11,7 @@ _start:
 	LDR R0, =buffer @ Load memory direction of the buffer
 	MOV R2, #0 @ compare with buffer size
 	MOV R3, #0 @ offset for reading
-	MOV R4, #6 @ value to write
+	MOV R4, #7 @ value to write
 	MOV R5, #0 @ buffer space
 
 _addElements:
@@ -36,7 +36,7 @@ _giveSpace:
 	LDR R1, =outPointer
 	LDR R6, [R1]
 	MOV R10, #0
-	STR R10, [R0, R6]
+	STR R10, [R1, R6]
 	ADD R6, R6, #4
 	STR R6, [R1]
 
