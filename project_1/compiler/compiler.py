@@ -107,13 +107,25 @@ def signExtension(number, instructionType, opcode, pointerLine):
 
             return binary
 
-# case 0: control risks
-def stallInsertionCase0(instructionElementsList, typeDictionary):
+# final case
+def stallInsertionEnd(instructionElementsList):
 
     result = instructionElementsList.copy()
 
     # this insertion avoids index out of range error
     result.append("*")
+
+    stall = ['suma', 'r14', 'r14', 'r14', "********************"]
+    
+    # Avoid missing data 
+    result.append(stall)
+
+    return result
+
+# case 0: control risks
+def stallInsertionCase0(instructionElementsList, typeDictionary):
+
+    result = instructionElementsList.copy()
 
     stall = ['suma', 'r14', 'r14', 'r14', "********************"]
 
@@ -658,7 +670,9 @@ def riskControlUnit(instructionElementsList, typeDictionary, opcodeDictionary):
 
     case3 = stallInsertionCase3(case2, typeDictionary, opcodeDictionary)    
 
-    return case3
+    finalCase = stallInsertionEnd(case3)
+
+    return finalCase
 
 def getinstructionElementsList(filename):
 
