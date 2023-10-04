@@ -63,3 +63,5 @@ set_global_assignment -name SYSTEMVERILOG_FILE segment_ex_mem.sv
 set_global_assignment -name SYSTEMVERILOG_FILE segment_id_ex.sv
 set_global_assignment -name SYSTEMVERILOG_FILE segment_if_id.sv
 set_global_assignment -name SYSTEMVERILOG_FILE segment_mem_wb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE jump_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE datapath.sv
