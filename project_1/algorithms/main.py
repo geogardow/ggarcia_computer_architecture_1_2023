@@ -13,7 +13,7 @@ subprocess.Popen(link).wait()
 qemu_command = ["qemu-arm", "-singlestep", "-g", "8080", file]
 
 # Ejecutar GDB y conectarlo al puerto 8080
-gdb_commands = ["arm-none-eabi-gdb", "-tui",
+gdb_commands = ["gdb-multiarch", "-tui",
                 file, "-ex", "target remote localhost:8080"]
 
 # Ejecuta QEMU en un proceso separado
