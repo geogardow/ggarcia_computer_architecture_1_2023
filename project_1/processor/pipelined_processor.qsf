@@ -52,3 +52,16 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name SYSTEMVERILOG_FILE extend.sv
+set_global_assignment -name SYSTEMVERILOG_FILE regfile.sv
+set_global_assignment -name SYSTEMVERILOG_FILE adder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE alu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_2to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_4to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE pc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_ex_mem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_id_ex.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_if_id.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_mem_wb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE jump_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE datapath.sv
