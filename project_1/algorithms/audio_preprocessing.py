@@ -52,10 +52,10 @@ def get_q78_samples(samples):
         else: 
             binary = "0"
         integer = int(abs(element))
-        binary = binary + str(integer).zfill(7)
+        binary = binary + str(integer)
         decimal = abs(element) - int(abs(element))
         sum = 0
-        for i in range(8):
+        for i in range(14):
             if sum + 2**(-(i+1)) < decimal:
                 sum += 2**(-(i+1))
                 binary = binary + "1"
