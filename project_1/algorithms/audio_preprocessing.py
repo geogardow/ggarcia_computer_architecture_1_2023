@@ -67,16 +67,16 @@ def get_q78_samples(samples):
 
 
 # Example usage:
-file_path = "input_audio.wav"
+file_path = "./project_1/algorithms/input_audio.wav"
 desired_sampling_frequency = 48000  # Change this to your desired sampling frequency
 samples = read_wav_file(file_path, desired_sampling_frequency)
 if samples is not None:
     print(samples)
     samples_q78 = get_q78_samples(samples)
 
-with open("audio.txt", 'w') as f:
+with open("./project_1/algorithms/audio.txt", 'w') as f:
     for i, value in enumerate(samples_q78):
-        f.write(f"{value};\n")
+        f.write(f"{value}\n")
 
 print(samples_q78[331000])
 print(samples[331000])

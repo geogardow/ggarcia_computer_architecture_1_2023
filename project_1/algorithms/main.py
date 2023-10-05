@@ -1,7 +1,7 @@
 import subprocess
 import time
 
-file = "buffer"
+file = "algorithmReverb"
 
 comp = ["arm-none-eabi-as", file+".s", "-g", "-o", file+".o"]
 link = ["arm-none-eabi-ld", file+".o", "-o", file]
