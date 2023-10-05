@@ -1,19 +1,19 @@
 module jump_unit(
 	input FlagZ,
-	input JumpCD,
-	input JumpCI,
-	input JumpI,
+	input BranchNI,
+	input BranchI,
+	input BranchB,
 	output PCSource
 	);
 	
-	// xor_gate = FlagZ ^ JumpCD
+	// xor_gate = FlagZ ^ BranchNI
 	
-	// and_gate_1 = (FlagZ ^ JumpCD) & JumpCD	
+	// and_gate_1 = (FlagZ ^ BranchNI) & BranchNI	
 	
-	// and_gate_2 = FlagZ & JumpCI	
+	// and_gate_2 = FlagZ & BranchI	
 	
-	// or_gate = ((FlagZ ^ JumpCD) & JumpCD) | JumpI | (FlagZ & JumpCI)
+	// or_gate = ((FlagZ ^ BranchNI) & BranchNI) | BranchB | (FlagZ & BranchI)
 	
-	assign PCSource = ((FlagZ ^ JumpCD) & JumpCD) | JumpI | (FlagZ & JumpCI);
+	assign PCSource = ((FlagZ ^ BranchNI) & BranchNI) | BranchB | (FlagZ & BranchI);
 	
 endmodule
