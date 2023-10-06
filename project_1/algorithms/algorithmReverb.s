@@ -1,4 +1,4 @@
-.section .data
+.section .data   @ datas from the line 1130
     datos: .word  0b1000001000001111, 0b1000001000010000,0b1000001000001100,0b1000001000000101,0b1000000111111010,0b1000000111110000,0b1000000111101110, 0b1000000111101110,0b1000000111101001,0b1000000111100000
     minus_a: .word 0b0001100110011001 @ 1-a=0.4
     a: .word 0b0010011001100110 @ a = 0.6
@@ -27,12 +27,14 @@ _loop:
     ADD R5, R5, R2
 
     @ Mask to delete the integer part and leave the decimals
-    AND R5, R5, #0xff
-    AND R3, R3, #0xff
+    LDR R1, =0x3fff
+    AND R5, R5, R1
+    AND R3, R3, R1
 
     @ Shift to delete the fraction part and leave the integer
     ASR R2, R2, #14
-
+    AND R2, R2, #1
+    
     @ high = 0, mid = b*c, low= b*d
     @ Multiply and shif b by d (low)
     MUL R6, R3, R2
@@ -94,3 +96,4 @@ _giveSpace:
 _end:
     MOV R7,#1
     SWI 0
+

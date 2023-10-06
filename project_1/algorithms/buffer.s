@@ -36,7 +36,7 @@ _giveSpace:
 	LDR R1, =outPointer
 	LDR R6, [R1]
 	MOV R10, #0
-	STR R10, [R1, R6]
+	STR R10, [R0, R6]
 	ADD R6, R6, #4
 	STR R6, [R1]
 
