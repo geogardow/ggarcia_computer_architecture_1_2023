@@ -53,8 +53,8 @@ module datapath (input clk, rst, start);;
 								  RegDtn_id, RegSrc2_id, RegSrc1_id);
 
 	mux_4to1 mux_4to1_id (instr_20_17_id, instr_20_17_id, instr_27_24_id, 32'd0, RegSrc1_id, RA1_id);
-	mux_2to1 mux_2to1_id1 (instr_16_13_id, instr_23_20_id, RegSrc2_id, RA2_id);
-	mux_2to1 mux_2to1_id2 (instr_24_21_id, instr_24_21_id, RegDtn_id, RA3_id);
+	mux_2to1 #(.N(4)) mux_2to1_id1 (instr_16_13_id, instr_23_20_id, RegSrc2_id, RA2_id);
+	mux_2to1 #(.N(4)) mux_2to1_id2 (instr_24_21_id, instr_24_21_id, RegDtn_id, RA3_id);
 
 	extend extend_id (instr_27_0_id, ImmSr_id, extend_out_id);
 
