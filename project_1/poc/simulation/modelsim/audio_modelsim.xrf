@@ -1,0 +1,12 @@
+vendor_name = ModelSim
+source_file = 1, C:/Users/dmeji/OneDrive - Estudiantes ITCR/TEC/Semestres/IIS2023/Arquitectura de Computadores I/ggarcia_computer_architecture_1_2023/project_1/poc/audio.sv
+source_file = 1, C:/Users/dmeji/OneDrive - Estudiantes ITCR/TEC/Semestres/IIS2023/Arquitectura de Computadores I/ggarcia_computer_architecture_1_2023/project_1/poc/audio_tb.sv
+source_file = 1, C:/Users/dmeji/OneDrive - Estudiantes ITCR/TEC/Semestres/IIS2023/Arquitectura de Computadores I/ggarcia_computer_architecture_1_2023/project_1/poc/db/audio.cbx.xml
+design_name = audio
+instance = comp, \PC_out~output , PC_out~output, audio, 1
+instance = comp, \flag~output , flag~output, audio, 1
+instance = comp, \led~output , led~output, audio, 1
+instance = comp, \read_arduino_in~input , read_arduino_in~input, audio, 1
+instance = comp, \data~input , data~input, audio, 1
+instance = comp, \PC_out~0 , PC_out~0, audio, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, audio, 1
