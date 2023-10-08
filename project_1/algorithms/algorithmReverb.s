@@ -25,9 +25,10 @@ _loop:
     LDR R2, [R1, R12] @ x(n); n = 0,1,2,....,336000
     @ Copying registers, this new ones will have the fraction part, and the old ones the integer part
     ADD R5, R5, R2
-
+    
+    
     @ Mask to delete the integer part and leave the decimals
-    LDR R1, =0x3fff
+    LDR R1, =0b0011111111111111
     AND R5, R5, R1
     AND R3, R3, R1
 
@@ -37,14 +38,24 @@ _loop:
     
     @ high = 0, mid = b*c, low= b*d
     @ Multiply and shif b by d (low)
-    MUL R6, R3, R2
+    MUL R6, R3, R5
     ASR R6, R6, #14
 
     @ Multiply b by c (half mid)
-    MUL R7, R3, R5
+    MUL R7, R3, R2
 
-    @ Result y(n)
+    @ Result y(n) without sign
     ADD R6, R6, R7
+    
+    @ get sign 
+    LDR R1, =datos
+    LDR R2, [R1, R12] @ x(n); n = 0,1,2,....,336000
+
+    LDR R1, =0b1000000000000000
+    AND R1, R2, R1
+
+    @ Result y(n) without sign
+    ADD R6, R6, R1
 
     @ TO DO: HACER ALGO PARA CUANDO n-k > 0 Hacer otro loop
 
@@ -70,6 +81,9 @@ _storeValue:
 	BGE _end
 
     ADD R12, R12, #4
+    LDR R5, =0b0
+    LDR R6, =0b0
+    
     B _loop
 
 _giveSpace:
