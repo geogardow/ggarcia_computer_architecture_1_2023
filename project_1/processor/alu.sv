@@ -1,7 +1,8 @@
 module alu( input [31:0] A, B,
 				input [2:0] sel,
 				output [31:0] C,
-				output flagZ);
+				output flagZ
+				output flagN);
 	
 	reg [31:0] alu_out_temp;
 	
@@ -33,5 +34,6 @@ module alu( input [31:0] A, B,
 	
 	// banderas
 	assign flagZ = (alu_out_temp == 31'd0);	// bandera de cero (Z)
+	assign flagN = (a < b);	// bandera de negativo (N)
 	
 endmodule 

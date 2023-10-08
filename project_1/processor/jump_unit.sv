@@ -1,5 +1,6 @@
 module jump_unit(
 	input FlagZ,
+	input FlagN,
 	input JumpCD,
 	input JumpCI,
 	input JumpI,

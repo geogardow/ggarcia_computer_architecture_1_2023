@@ -4,9 +4,8 @@
 								output logic BranchB, BranchI, BranchNI, MemToReg, MemRead, MemWrite, 
 								output logic [2:0] ALUOp,
 								output logic ALUSrc, RegWrite,
-								output logic [1:0] ImmSrc, RegDtn, 
-								output logic RegSrc2, 
-								output logic [1:0] RegSrc1);
+								output logic [1:0] ImmSrc, 
+								output logic RegSrc2,RegSrc1);
 			
 	always_latch
 	begin
@@ -22,7 +21,6 @@
 				ALUSrc = 0;
 				RegWrite = 0;
 				ImmSrc = 0;
-				RegDtn = 0;
 				RegSrc2 = 0;
 				RegSrc1 = 0;
 			end
@@ -39,9 +37,8 @@
 				ALUSrc = 0;
 				RegWrite = 1;
 				ImmSrc = 2'bxx;
-				RegDtn = 1'b1;
-				RegSrc2 = 1'b1;
-				RegSrc1 = 2'b10;
+				RegSrc2 = 1'b0;
+				RegSrc1 = 1'b0;
 				
 				// suma
 				if (func[4:0] == 5'b00000)
@@ -77,9 +74,8 @@
 				ALUSrc = 1;
 				RegWrite = 1;
 				ImmSrc = 2'b10;
-				RegDtn = 1'b1;
 				RegSrc2 = 1'bx;
-				RegSrc1 = 2'b10;
+				RegSrc1 = 1'b0;
 				
 				// sumita
 				if (func[4:0] == 5'b10100)
@@ -128,9 +124,8 @@
 				ALUOp = 3'b001;
 				RegWrite = 0;
 				ImmSrc = 2'b00;
-				RegDtn = 1'bx;
-				RegSrc2 = 1'b0;
-				RegSrc1 = 2'b00;
+				RegSrc2 = 1'b1;
+				RegSrc1 = 1'b1;
 				
 				// brinco instruction
 				if (func[4:3] == 2'b00)
@@ -165,9 +160,8 @@
 				ALUSrc = 1;
 				ALUOp = 3'b000;
 				ImmSrc = 2'b01;
-				RegDtn = 1'b0;
 				RegSrc2 = 1'bx;
-				RegSrc1 = 2'b01;
+				RegSrc1 = 1'b0;
 				
 				// guardar instruction
 				if (func[4] == 1'b1)
