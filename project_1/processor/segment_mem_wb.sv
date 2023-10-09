@@ -1,10 +1,10 @@
- module segment_mem_wb (input logic clk, rst,
+module segment_mem_wb (input logic clk, rst,
 								input logic MemToReg_in, RegWrite_in,
 								input logic [31:0] mem_in, alu_in,
-								input logic [3:0] RR3_in,
+								input logic [3:0] RA3_in,
 								output logic MemToReg_out, RegWrite_out,
 								output logic [31:0] mem_out, alu_out,
-								output logic [3:0] RR3_out);
+								output logic [3:0] RA3_out);
 			
 	always_ff@(negedge clk, posedge rst)
 		if(rst)
@@ -13,7 +13,7 @@
 				RegWrite_out = 0;
 				mem_out = 0;
 				alu_out = 0;
-				RR3_out = 0;
+				RA3_out = 0;
 			end
 			
 		else 
@@ -22,7 +22,7 @@
 				RegWrite_out = RegWrite_in;
 				mem_out = mem_in;
 				alu_out = alu_in;
-				RR3_out = RR3_in;
+				RA3_out = RA3_in;
 			end
 		
 endmodule

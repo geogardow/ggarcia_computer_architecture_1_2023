@@ -1,7 +1,7 @@
  module control_unit (input logic [1:0] instruction_type, 
 								input logic [4:0] func,
 								input logic rst,
-								output logic BranchB, BranchI, BranchNI, MemToReg, MemRead, MemWrite, 
+								output logic BranchB, BranchI, BranchGEQ, BranchLEQ, MemToReg, MemRead, MemWrite, 
 								output logic [2:0] ALUOp,
 								output logic ALUSrc, RegWrite,
 								output logic [1:0] ImmSrc, 
@@ -13,7 +13,8 @@
 			begin
 				BranchB = 0;
 				BranchI = 0;
-				BranchNI = 0;
+				BranchGEQ = 0;
+				BranchLEQ = 0;
 				MemToReg = 0;
 				MemRead = 0;
 				MemWrite = 0;
@@ -30,7 +31,8 @@
 			begin
 				BranchB = 0;
 				BranchI = 0;
-				BranchNI = 0;
+				BranchGEQ = 0;
+				BranchLEQ = 0;
 				MemToReg = 0;
 				MemRead = 0;
 				MemWrite = 0;
@@ -67,7 +69,8 @@
 			begin
 				BranchB = 0;
 				BranchI = 0;
-				BranchNI = 0;
+				BranchGEQ = 0;
+				BranchLEQ = 0;
 				MemToReg = 0;
 				MemRead = 0;
 				MemWrite = 0;
@@ -100,17 +103,17 @@
 				// cad
 				if (func[4:0] == 5'b11000)
 					begin
-						// definir
+						ALUOp = 3'b100;
 					end
 				// cld
 				if (func[4:0] == 5'b11001)
 					begin
-						// definir
+						ALUOp = 3'b101;
 					end
 				// cli
 				if (func[4:0] == 5'b11010)
 					begin
-						// definir
+						ALUOp = 3'b110;
 					end    
 			end
 			
@@ -132,21 +135,32 @@
 					begin
 						BranchB = 1;
 						BranchI = 0;
-						BranchNI = 0;
+						BranchLEQ = 0;
+						BranchGEQ = 0;
+					end
+				// leq instruction
+				if (func[4:3] == 2'b11)
+					begin
+						BranchB = 0;
+						BranchI = 0;
+						BranchLEQ = 1;
+						BranchGEQ = 0;
 					end
 				// igual instruction	
 				if (func[4:3] == 2'b10)
 					begin
 						BranchB = 0;
 						BranchI = 1;
-						BranchNI = 0;
+						BranchLEQ = 0;
+						BranchGEQ = 0;
 					end
-				// nigual instruction
+				// geq instruction
 				if (func[4:3] == 2'b11)
 					begin
 						BranchB = 0;
 						BranchI = 0;
-						BranchNI = 1;
+						BranchLEQ = 0;
+						BranchGEQ = 1;
 					end
 					
 			end
@@ -156,7 +170,8 @@
 			begin
 				BranchB = 0;
 				BranchI = 0;
-				BranchNI = 0;
+				BranchLEQ = 0;
+				BranchGEQ = 0;
 				ALUSrc = 1;
 				ALUOp = 3'b000;
 				ImmSrc = 2'b01;

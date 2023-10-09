@@ -122,7 +122,7 @@ module regfile(
 			case (RD)
 			
 				// escribe en el registro A3
-				4'd0: R0 = 31'd0; // registro 0
+				4'd0: R0 = WD; // registro 0
 				4'd1: R1 = WD; // registro 1
 				4'd2: R2 = WD; // registro 2
 				4'd3: R3 = WD; // registro 3
@@ -136,7 +136,7 @@ module regfile(
 				4'd11: R11 = WD; // registro 11
 				4'd12: R12 = WD; // registro 12
 				4'd13: R13 = WD; // registro 13
-				4'd14: R14 = WD; // registro 14
+				4'd14: R14 = 31'd0; // registro 14
 				4'd15: R15 = WD;
 			
 			endcase

@@ -311,7 +311,7 @@ def stallInsertionCase1(instructionElementsList, typeDictionary, opcodeDictionar
                                 result.insert(i + 3, stall)
 
                     # data instruction
-                    else:
+                    elif(nextInstructionType == "01"):
 
                         nextSource2 = nextinstructionElementsList[2]
                         nextSource3 = nextinstructionElementsList[3]
@@ -421,7 +421,7 @@ def stallInsertionCase2(instructionElementsList, typeDictionary, opcodeDictionar
                                 result.insert(i + 2, stall)
                                         
                     # data instruction
-                    else:
+                    elif(nextInstructionType == "01"):
 
                         nextSource2 = nextinstructionElementsList[2]
                         nextSource3 = nextinstructionElementsList[3]
@@ -432,7 +432,7 @@ def stallInsertionCase2(instructionElementsList, typeDictionary, opcodeDictionar
                             result.insert(i + 2, stall)
 
                 # data instruction
-                else:
+                elif(nextInstructionType == "01"):
                     
                     # control instruction
                     if(nextInstructionType == "10"):
@@ -481,7 +481,7 @@ def stallInsertionCase2(instructionElementsList, typeDictionary, opcodeDictionar
                                 result.insert(i + 2, stall)
 
                     # data instruction
-                    else:
+                    elif(nextInstructionType == "01"):
 
                         nextSource2 = nextinstructionElementsList[2]
                         nextSource3 = nextinstructionElementsList[3]
@@ -510,7 +510,6 @@ def stallInsertionCase3(instructionElementsList, typeDictionary, opcodeDictionar
 
 
     i = 0
-
     # loop to iterate each instruction
     for j in result:
 
@@ -653,7 +652,7 @@ def stallInsertionCase3(instructionElementsList, typeDictionary, opcodeDictionar
 
                             result.insert(i + 1, stall)
 
-        i += 1
+            i += 1
 
     return result[:-1]
 
@@ -858,6 +857,31 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
 
     return instructionElementsList
 
+
+def convert_to_mif(input_file, output_file):
+    # Read the binary data from the text file
+    with open(input_file, 'r') as file:
+        binary_data = file.readlines()
+
+    # Remove leading/trailing whitespace and convert to MIF format
+    mif_content = f"""WIDTH = {len(binary_data[0].strip())};\n"""
+    mif_content += f"""DEPTH = {len(binary_data)};\n"""
+    mif_content += "ADDRESS_RADIX = HEX;\n"
+    mif_content += "DATA_RADIX = BIN;\n\n"
+    mif_content += "CONTENT\nBEGIN\n"
+
+    for address, data in enumerate(binary_data):
+        mif_content += f"{address:02X} : {data.strip()};\n"
+
+    mif_content += "END;\n"
+
+    # Write the formatted data to the output .mif file
+    with open(output_file, 'w') as file:
+        file.write(mif_content)
+
+
+
+
 # instr type dictionary 
 typeDictionary = {
     "cargar": "00",
@@ -876,7 +900,8 @@ typeDictionary = {
     "cli": "01",
 
     "igual": "10",
-    "nigual": "10",
+    "geq": "10",
+    "leq": "10",
     "brinco": "10",
 }
 
@@ -898,8 +923,9 @@ opcodeDictionary = {
     "cli": "11010",
 
     "igual": "10",
-    "nigual": "11",
-    "brinco": "00"
+    "geq": "11",
+    "leq": "01",
+    "brinco": "00",
 }
 
 # register dictionary definition
@@ -929,3 +955,8 @@ instructionElementsList = riskControlUnit(instructionElementsList, typeDictionar
 labelDictionary, instructionElementsList = getLabelDictionary(instructionElementsList)
 
 binaryInstructions('binaryCode.txt', instructionElementsList, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
+
+input_file = 'BinaryCode.txt'
+output_file = 'output.mif'
+
+convert_to_mif(input_file, output_file)

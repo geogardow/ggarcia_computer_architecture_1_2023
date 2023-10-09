@@ -1,4 +1,4 @@
- module segment_id_ex (input logic JumpI_in, JumpCI_in, JumpCD_in, clk, rst,
+ module segment_id_ex (input logic BranchB_in, BranchI_in, BranchGEQ_in, BranchLEQ_in, clk, rst, 
 								input logic MemToReg_in, MemRead_in, MemWrite_in, 
 								input logic [2:0] ALUOp_in, 
 								input logic ALUSrc_in, RegWrite_in,
@@ -11,14 +11,15 @@
 								output logic [31:0] pc_out, RD1_out, RD2_out, RD3_out, 
 								output logic [3:0] RR3_out,
 								output logic [31:0] num_out,
-								output logic JumpI_out, JumpCI_out, JumpCD_out);
+								output logic BranchB_out, BranchI_out, BranchGEQ_out, BranchLEQ_out);
 			
 	always_ff@(negedge clk, posedge rst)
 		if(rst)
 			begin
-				JumpI_out = 0;
-				JumpCI_out = 0;
-				JumpCD_out = 0;
+				BranchB_out = 0;
+				BranchI_out = 0;
+				BranchGEQ_out = 0;
+				BranchLEQ_out = 0;
 				MemToReg_out = 0;
 				MemRead_out = 0;
 				MemWrite_out = 0;
@@ -35,9 +36,10 @@
 			
 		else 
 			begin
-				JumpI_out = JumpI_in;
-				JumpCI_out = JumpCI_in;
-				JumpCD_out = JumpCD_in;
+				BranchB_out = BranchB_in;
+				BranchI_out = BranchI_in;
+				BranchGEQ_out = BranchGEQ_in;
+				BranchLEQ_out = BranchLEQ_in;
 				MemToReg_out = MemToReg_in;
 				MemRead_out = MemRead_in;
 				MemWrite_out = MemWrite_in;

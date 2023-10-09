@@ -1,19 +1,32 @@
-module program_counter(input clk, rst, input logic [31:0] PC, output logic [31:0] PC_out);
-
-	logic [31:0] state, next_state;
-
-	//actual state logic
-	always_ff @ (posedge clk or posedge rst)
-		if (rst) state = 32'd0;
+module pc(
+	input clk,
+	input rst,
+	input load,
+	input [31:0] pc_in,
+	output [31:0] pc_out
+	);
+	
+	logic [31:0] pc;
+	logic [31:0] pc_temp;
+	
+	always_ff @(posedge clk) begin
+	
+		pc_temp <= pc;
+			
+	end
+	
+	always_ff @(negedge clk, negedge rst) begin
+	
+		if (rst == 0)
+			pc <= 0;
+		else if (load == 1)	
+			pc <= pc_in;
 		else
-			state = next_state;
-
-	//next state logic
-	always_comb begin
-		next_state = state + 32'd1; 
-
-	end 
-	//output logic
-	assign PC_out = state;	
-
-endmodule
+			pc <= pc;
+	
+	end
+			
+	//assign pc_out = pc_temp;
+	assign pc_out = pc;
+	
+endmodule 
