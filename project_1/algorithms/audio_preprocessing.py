@@ -78,8 +78,8 @@ with open("./project_1/algorithms/audio.txt", 'w') as f:
     for i, value in enumerate(samples_q78):
         f.write(f"{value}\n")
 
-print(samples_q78[331000])
-print(samples[331000])
+print(samples_q78[1129])
+print(samples[1129])
 
 
 
