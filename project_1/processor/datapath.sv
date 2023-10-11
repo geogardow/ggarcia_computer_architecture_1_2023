@@ -27,6 +27,7 @@ module datapath (input clkFPGA, rst, start);
 	logic [3:0] RA3_mem;
 	logic MemRead_mem, MemWrite_mem, RegWrite_mem, MemToReg_mem;
 	
+	 
 	
 	//WB
 	logic [31:0] data_out_wb, alu_out_wb, data_mux_wb;
