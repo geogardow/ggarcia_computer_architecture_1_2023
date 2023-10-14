@@ -56,7 +56,7 @@ def get_q78_samples(samples):
         decimal = abs(element) - int(abs(element))
         sum = 0
         for i in range(14):
-            if sum + 2**(-(i+1)) < decimal:
+            if sum + 2**(-(i+1)) <= decimal:
                 sum += 2**(-(i+1))
                 binary = binary + "1"
             else:
@@ -78,9 +78,36 @@ with open("./project_1/algorithms/audio.txt", 'w') as f:
     for i, value in enumerate(samples_q78):
         f.write(f"{value}\n")
 
-print(samples_q78[1129])
-print(samples[1129])
+example = samples[1129:1139]
 
+
+#y(n) = (1-a)*x(n)+a*y(n-k); k= 2400
+
+def getReverb(example):
+    result = []
+    for i in range(len(example)):
+        if i > 4:
+            result.append(0.4*example[i]+0.6*result[i-5])
+        else:
+            result.append(0.4*example[i])
+    return result
+
+def getDeReverb(example):
+    result = []
+    for i in range(len(example)):
+        if i > 4:
+            result.append(2.5*example[i]-1.5*example[i-5])
+        else:
+            result.append(2.5*example[i])
+    return result
+
+print(max(samples))
+print("\nLista original")
+print(example)
+print("\nLista q114")
+print(samples_q78[1129:1139])
+print("\nLista resultado")
+print(getDeReverb(example))
 
 
 

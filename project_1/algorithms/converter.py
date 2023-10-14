@@ -16,4 +16,15 @@ def get_q78_samples(element):
 
     return binary
 
-print(get_q78_samples(0.6))
+def get_decimal(decimal):
+    binary = bin(decimal)[2:].zfill(16)
+    numbers = list(map(int, [x for x in binary][2:]))
+    result = 0
+    print(numbers)
+    for i, c in enumerate(numbers):
+        result += (2**(-(i+1)))*c
+
+    return result
+
+
+print(get_q78_samples(1.5))

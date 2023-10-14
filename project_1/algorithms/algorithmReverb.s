@@ -36,7 +36,8 @@ _loop:
     LDR R3, [R1] @ 1-a
 
     LDR R1, =datos @LDR R1, DIR_BURN
-    LDR R2, [R1, R12] @ x(n); n = 0,1,2,....,336000, remember R12 increments in order to access the right data and in linear order
+    ADD R1, R1, R12
+    LDR R2, [R1] @ x(n); n = 0,1,2,....,336000, remember R12 increments in order to access the right data and in linear order
     @ Copying registers, this new ones will have the fraction part, and the old ones the integer part
     MOV R5, R2 @ Copy of R2 in R5, not done with mov in order to help the processor
     
@@ -66,7 +67,8 @@ _loop:
     @ get sign 
     @ To do this we reload the data because we lost it
     LDR R1, =datos
-    LDR R2, [R1, R12] @ x(n); n = 0,1,2,....,336000
+    ADD R1, R1, R12
+    LDR R2, [R12] @ x(n); n = 0,1,2,....,336000
 
     @ Leaves just the sign
     LDR R1, =0b1000000000000000
@@ -88,7 +90,8 @@ _addExtra:
     LDR R1, =outPointer @ offset for writing and in pointer
 	LDR R10, [R1]   @ value for offset
     LDR R8, =buffer
-	LDR R2, [R8,R10] @ Stores in buffer plus input offset
+    ADD R8, R8, R10
+	LDR R2, [R8] @ Stores in buffer plus input offset
 
     @ Copying registers, this new ones will have the fraction part, and the old ones the integer part
     MOV R5, R2 @ Copy of R2 in R5, not done with mov in order to help the processor
@@ -120,7 +123,8 @@ _addExtra:
     LDR R1, =outPointer @ offset for writing and in pointer
 	LDR R10, [R1]   @ value for offset
     LDR R3, =buffer
-	LDR R2, [R3,R10] @ Stores in buffer plus input offset
+    ADD R3, R3, R10
+	LDR R2, [R3] @ Stores in buffer plus input offset
 
     @ Leaves just the sign
     LDR R1, =0b1000000000000000
@@ -186,7 +190,8 @@ _storeValue:
 	LDR R1, =inPointer @ offset for writing and in pointer
 	LDR R10, [R1]   @ value for offset
     LDR R8, =buffer
-	STR R6, [R8,R10] @ Stores in buffer plus input offset
+    ADD R8, R8, R10
+	STR R6, [R8] @ Stores in buffer plus input offset
 	ADD R10, R10, #4 @ Increments input offset
 	STR R10, [R1] @ Store the new offset value in the pointer memory address
 	
@@ -212,7 +217,8 @@ _giveSpace:
 
 	MOV R11, #0 @ Trash known value
     LDR R8, =buffer 
-	STR R11, [R8, R10] @ Stores trash value into buffer in the out position
+    ADD R8, R8, R10
+	STR R11, [R8] @ Stores trash value into buffer in the out position
 
 	ADD R10, R10, #4 @ Output offset has to increment
 	STR R10, [R1] @ Stores the new offset value for the out
