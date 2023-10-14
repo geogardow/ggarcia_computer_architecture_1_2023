@@ -74,7 +74,7 @@ if samples is not None:
     print(samples)
     samples_q78 = get_q78_samples(samples)
 
-with open("./project_1/algorithms/audio.txt", 'w') as f:
+with open("./project_1/algorithms/audio.mif", 'w') as f:
     for i, value in enumerate(samples_q78):
         f.write(f"{value}\n")
 

@@ -33,6 +33,14 @@ _loop:
     LDR R1, =datos @LDR R1, DIR_BURN
     ADD R1, R1, R12
     LDR R2, [R1] @ x(n); n = 0,1,2,....,336000, remember R12 increments in order to access the right data and in linear order
+    
+    LDR R1, =0b0111111111111111
+    AND R1, R2, R1
+    ASR R1, R1, #2
+    LDR R3, =0b1000000000000000
+    AND R3, R2, R3
+    ADD R2, R1, R3
+
     @ Copying registers, this new ones will have the fraction part, and the old ones the integer part
     MOV R5, R2 @ Copy of R2 in R5, not done with mov in order to help the processor
     
@@ -45,12 +53,12 @@ _loop:
     @ Shift to delete the fraction part and leave the integer
     @ R2 has the integer part
     ASR R2, R2, #12 @ Lose fractional part
-    AND R2, R2, #111 @ Lose sign
+    AND R2, R2, #7 @ Lose sign
     
     @ high = a*c, mid = a*d + b*c, low= b*d
     @ Multiply and shif a by c (high)
     LDR R3, =0b10 @ 2
-    MUL R7, R3, R5
+    MUL R7, R3, R2
     LSL R7, R7, #12
     ADD R6, R6, R7
 
@@ -66,10 +74,14 @@ _loop:
 
     @ Multiply a by d (half mid)
     LDR R3, =0b10 @ 2
-    MUL R7, R3, R2
+    MUL R7, R3, R5
     
     @ Result y(n) without sign
     ADD R6, R6, R7
+
+    @ TO DO: HACER ALGO PARA CUANDO n-k > 0 Hacer otro loop
+    CMP R4, #6 @ It should be 2400 + 1
+    BGE _addExtra
 
     @ get sign 
     @ To do this we reload the data because we lost it
@@ -80,24 +92,23 @@ _loop:
     @ Leaves just the sign
     LDR R1, =0b1000000000000000
     AND R1, R2, R1
-
     @ Result y(n) with sign
     ADD R6, R6, R1 @ Add the sign 
 
-    @ TO DO: HACER ALGO PARA CUANDO n-k > 0 Hacer otro loop
-    CMP R4, #6 @ It should be 2400 + 1
-    BGE _addExtra
-
+    LDR R3, =0b0111111111111111
+    AND R3, R6, R3
     MOV R2, R1
+
     LDR R1, =0b0001000000000000
-    CMP R6, R1
+    CMP R3, R1
     BGE _adjust
 
-    B _storeValue
+    B _preStore
 
 _addExtra:
+    MOV R8, #0
     LDR R1, =datos
-    LDR R2, =9600 @ 2400 * 4
+    LDR R2, =20 @ 2400 * 4
     SUB R1, R1, R2
     ADD R1, R1, R12
     LDR R2, [R1] @ x(n); n = 0,1,2,....,336000
@@ -110,12 +121,12 @@ _addExtra:
     @ Shift to delete the fraction part and leave the integer
     @ R2 has the integer part
     ASR R2, R2, #12 @ Lose fractional part
-    AND R2, R2, #111 @ Lose sign
+    AND R2, R2, #7 @ Lose sign
     
     @ high = a*c, mid = a*d + b*c, low= b*d
     @ Multiply and shif a by c (high)
     LDR R3, =0b10 @ 2
-    MUL R7, R3, R5
+    MUL R7, R3, R2
     LSL R7, R7, #12
     ADD R8, R8, R7
 
@@ -130,8 +141,8 @@ _addExtra:
     ADD R8, R8, R7
 
     @ Multiply a by d (half mid)
-    LDR R3, =0b10 @ 2
-    MUL R7, R3, R2
+    LDR R3, =0b1 @ 1
+    MUL R7, R3, R5
     
     @ Result y(n) without sign
     ADD R8, R8, R7
@@ -139,6 +150,8 @@ _addExtra:
     @ get sign 
     @ To do this we reload the data because we lost it
     LDR R1, =datos
+    LDR R2, =20 @ 2400 * 4
+    SUB R1, R1, R2
     ADD R1, R1, R12
     LDR R2, [R1] @ x(n); n = 0,1,2,....,336000
 
@@ -202,16 +215,18 @@ _adjust:
     ADD R6, R6, R2
     B _storeValue
 
-_storeValue:
-    CMP R9, #5 @Verifies if there is room in the buffer
-	BEQ _giveSpace
-    
+_preStore:
     LDR R1, =0b0111111111111111
     AND R1, R6, R1
     LSL R1, R1, #2
     LDR R2, =0b1000000000000000
-    AND R2, R6, R1
+    AND R2, R6, R2
     ADD R6, R1, R2
+    B _storeValue
+
+_storeValue:
+    CMP R9, #5 @Verifies if there is room in the buffer
+	BEQ _giveSpace
 
 	LDR R1, =inPointer @ offset for writing and in pointer
 	LDR R10, [R1]   @ value for offset
