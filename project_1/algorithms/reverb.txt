@@ -41,3 +41,53 @@ _loop:
 	geq r4,r0, _addExtra
 
 	brinco _storeValue
+
+
+
+
+_storeValue:
+	sumita r0,r15,2400	
+	geq r9,r0,_giveSpace
+	
+	sumita r1,r15,3330 //inPointer
+	cargar r10,0(r1)
+	sumita r8,r15,4500
+	suma r8,r8,r10
+	guardar r6,0(r8)
+	sumita r10,r10,4
+	guardar r10,0(r1)
+	
+	sumita r9,r9,1
+	sumita r4,r4,1
+	
+	sumit r0,r15,336000
+	geq r4,r0,_end
+
+	sumita r12,r12,4
+	suma r5,r15,r15
+	suma r6,r15,r15
+	
+	brinco _loop
+_giveSpace:
+	sumita r8,r15,3300 //inPointer
+	
+	sumita r1,r15,5000 //outPointer
+	cargar r10,0(r1)
+
+	guardar r10,0(r8)
+
+	sumita r11,r15,r15
+
+	sumita r8,r15,4500 //buffer
+	suma r8,r8,r10
+	
+	guardar r11,0(r8)
+	
+	sumita r10,r10,4
+	guardar r10,0(r1)
+
+	sub r9,r9,1
+
+	brinco _storeValue
+_end:
+	sumita r0,r15,1
