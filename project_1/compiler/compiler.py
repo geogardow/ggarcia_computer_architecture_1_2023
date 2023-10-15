@@ -911,7 +911,7 @@ def convert_to_mif(input_file, output_file):
 # instr type dictionary 
 typeDictionary = {
     "cargar": "00",
-    "guardar": "00",
+    "guardar": "01",
 
     "suma": "01",
     "resta": "01",
