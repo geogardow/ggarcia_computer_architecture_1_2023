@@ -1,0 +1,43 @@
+_start:
+	sumita r4,r15,1
+	sumita r9,r15,0
+	sumita r12,r15,0
+
+_loop:
+	sumita r1,r15,10000 // minus_a
+	cargar r3,0(r1)
+
+	sumita r1,r15,10000 //datos
+	suma r1,r1,r12
+	cargar r2,0(r1)
+	
+	suma r5,r15,r2
+	
+	sumita r1,r15,16383
+	union r5,r5,r1
+	union r3,r3,r1
+	
+	cad r2,r2,14
+	unioncita r2,r2,1
+
+	
+	mult r6,r3,r5
+	cad r6,r6,14
+
+	mult r7,r3,r2
+
+	suma r6,r6,r7
+	
+	sumita r1,r15,10000 //datos
+	suma r1,r1,r12
+	cargar r2,0(r1)
+
+	sumita r1,r15,32768
+	union r1,r2,r1
+
+	suma r6,r6,r1
+
+	sumita r0, r15,2401
+	geq r4,r0, _addExtra
+
+	brinco _storeValue
