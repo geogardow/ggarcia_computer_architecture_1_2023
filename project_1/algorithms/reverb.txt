@@ -151,7 +151,7 @@ _giveSpace:
 	
 	sumita r1,r15,5000 //outPointer
 	cargar r10,0(r1)
-
+	
 	guardar r10,0(r8)
 
 	sumita r11,r15,r15
