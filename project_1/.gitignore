@@ -21,7 +21,6 @@
 *.sopc_builder
 *.summary
 *.tcl
-*.txt
 *~
 *example*
 *sopc_*
@@ -38,4 +37,3 @@
 db/*
 _output_files/*
 PLLJ_PLLSPE_INFO.txt
-*/greybox_tmp/*

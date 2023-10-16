@@ -1,3 +1,9 @@
 inicio:
 sumita r0, r14, 12
 sumita r1, r0, 10
+brinco final
+sumita r1, r14, 2
+final:
+resta r5, r1, r0
+suma r6, r1, r5
+sumita r7, r14, 120
