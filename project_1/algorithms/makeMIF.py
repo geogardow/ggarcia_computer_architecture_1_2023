@@ -4,7 +4,7 @@ def convert_file(input_file1, input_file2, output_file):
         lines2 = f_in2.readlines()
 
         width = 16
-        depth = 321602
+        depth = 321604
 
         f_out.write("WIDTH = {};\n".format(width))
         f_out.write("DEPTH = {};\n".format(depth))
@@ -16,6 +16,10 @@ def convert_file(input_file1, input_file2, output_file):
         f_out.write("{} : {};\n".format(format(current_line_number, '02X'), "0001100110011001"))
         current_line_number += 1 # a
         f_out.write("{} : {};\n".format(format(current_line_number, '02X'), "0010011001100110")) 
+        current_line_number += 1 # inpointer
+        f_out.write("{} : {};\n".format(format(current_line_number, '02X'), "".zfill(16))) 
+        current_line_number += 1 # outpointer
+        f_out.write("{} : {};\n".format(format(current_line_number, '02X'), "".zfill(16))) 
         current_line_number += 1
 
         for i in range(1600):
