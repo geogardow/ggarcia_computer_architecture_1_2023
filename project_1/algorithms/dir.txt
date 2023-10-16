@@ -1,8 +1,0 @@
-Con 2 bytes:
-datos audio 1: 0 a 2 559 999
-datos audio 2: 2 560 000 a 5 119 999
-buffer: 5 120 000 a 5 145 599
-minus_a: 5 145 600 a 5 145 615
-a: 5 145 616 a 5 145 631
-inPointer: 5 145 632 a 5 145 663
-outPointer: 5 145 664 a 5 145 695
