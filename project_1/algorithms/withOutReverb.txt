@@ -69,7 +69,7 @@ _loop:
 _addExtra:
     suma r8,r15,r15
     sumita r1,r15,0 //datos
-    sumita r2,r15,9600
+    sumita r2,r15,3200
     SUB R1, R1, R2
     ADD R1, R1, R12
     cargar r2,0(r1)
@@ -166,12 +166,12 @@ _preStore:
     brinco _storeValue
 
 _storeValue:
-    sumita r0,r15,2400	
+    sumita r0,r15,1600	
 	geq r9,r0,_giveSpace
 	
 	sumita r1,r15,5145632 //inPointer
 	cargar r10,0(r1)
-	sumita r8,r15,4500
+	sumita r8,r15,5100000
 	suma r8,r8,r10
 	sumita r14,r14,1
 	guardar r6,0(r8)
@@ -182,7 +182,7 @@ _storeValue:
 	sumita r4,r4,1
 	
 	sumita r14,r15,r15
-	sumita r0,r15,336000
+	sumita r0,r15,160000
 	geq r4,r0,_end
 
 	sumita r12,r12,2

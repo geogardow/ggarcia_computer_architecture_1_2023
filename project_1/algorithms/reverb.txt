@@ -92,6 +92,7 @@ _neg:
 	suma r8,r15,r6
 	suma r6,r15,r2
 	brinco _notEqualSign
+
 _pos:
 	sumita r2,r15,32768
 	geq r8,r2,_equalSign
@@ -129,7 +130,7 @@ _storeValue:
 	
 	sumita r1,r15,5145632 //inPointer
 	cargar r10,0(r1)
-	sumita r8,r15,4500
+	sumita r8,r15,5120000 //buffer
 	suma r8,r8,r10
 	sumita r14,r14,1
 	guardar r6,0(r8)
@@ -140,7 +141,7 @@ _storeValue:
 	sumita r4,r4,1
 	
 	sumita r14,r15,r15
-	sumit r0,r15,336000
+	sumit r0,r15,160000 
 	geq r4,r0,_end
 
 	sumita r12,r12,2

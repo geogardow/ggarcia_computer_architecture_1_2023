@@ -1,5 +1,5 @@
 Con 2 bytes:
-datos audio 1: 0 a 2 599 999
+datos audio 1: 0 a 2 559 999
 datos audio 2: 2 560 000 a 5 119 999
 buffer: 5 120 000 a 5 145 599
 minus_a: 5 145 600 a 5 145 615
