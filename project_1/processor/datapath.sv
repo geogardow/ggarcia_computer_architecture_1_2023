@@ -1,4 +1,4 @@
-module datapath (input clkFPGA, rst, start, output logic [10:0] R6_audio, output logic R14_flag);
+module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, output logic R14_flag, output logic R13_flag_out);
 
 	//IF
 	logic [31:0] pc_in_if, pc_out_if, pc_plus1_if, instruction_if;
@@ -13,7 +13,7 @@ module datapath (input clkFPGA, rst, start, output logic [10:0] R6_audio, output
 	logic [2:0] ALUOp_id;
 	logic [1:0] instr_31_30_id, ImmSr_id;
 	logic BranchB_id, BranchI_id, BranchGEQ_id, BranchLEQ_id, RegDtn_id, MemToReg_id, MemRead_id, MemWrite_id,
-			ALUSrc_id, RegWrite_id, RegSrc2_id, RegSrc1_id, R14_flag_temp;
+			ALUSrc_id, RegWrite_id, RegSrc2_id, RegSrc1_id, R14_flag_temp, R13_flag_out_temp;
 	
 	//EX
 	logic [31:0] pc_plus_imm_ex, pc_ex, alu_op2_ex, alu_out_ex, RD1_ex, RD2_ex, RD3_ex, extend_ex;
@@ -47,7 +47,7 @@ module datapath (input clkFPGA, rst, start, output logic [10:0] R6_audio, output
 	mux_2to1 #(.N(32)) mux_2to1_if (pc_plus1_if, pc_plus_imm_ex, PCSource_out_ex, pc_in_if);
 	pc pc_if (clk, ~rst, 1'd1, pc_in_if, pc_out_if);
 	adder adder_if (pc_out_if, 32'd1, pc_plus1_if);
-	rom rom_inst(.address(pc_out_if[7:0]), .clock(clk), .q(instruction_if));
+	rom2 rom_inst(.address(pc_out_if[9:0]), .clock(clk), .q(instruction_if));
 
 	// IF/ID Segmentation
 	segment_if_id if_id (clk, rst, pc_out_if, instruction_if, pc_id, instr_31_30_id, instr_29_25_id,
@@ -65,7 +65,7 @@ module datapath (input clkFPGA, rst, start, output logic [10:0] R6_audio, output
 	extend extend_id (instr_27_0_id, ImmSr_id, extend_out_id);
 
 	// instr_24_21_id = RA3_id
-	regfile regfile_id (RA1_id, RA2_id, instr_24_21_id, RA3_wb, data_mux_wb, RegWrite_wb, clk, rst, RD1_id, RD2_id, RD3_id, R6_audio_temp, R14_flag_temp);
+	regfile regfile_id (RA1_id, RA2_id, instr_24_21_id, RA3_wb, data_mux_wb, R13_flag, RegWrite_wb, clk, rst, RD1_id, RD2_id, RD3_id, R6_audio_temp, R14_flag_temp, R13_flag_out_temp);
 
 	// ID/EX Segmentation
 	segment_id_ex id_ex (BranchB_id, BranchI_id, BranchGEQ_id, BranchLEQ_id, clk, rst, MemToReg_id, MemRead_id, MemWrite_id, ALUOp_id, ALUSrc_id, RegWrite_id,
@@ -100,5 +100,6 @@ module datapath (input clkFPGA, rst, start, output logic [10:0] R6_audio, output
 	
 	assign R6_audio = R6_audio_temp;
 	assign R14_flag = R14_flag_temp;
+	assign R13_flag_out = R13_flag_out_temp;
 
 endmodule

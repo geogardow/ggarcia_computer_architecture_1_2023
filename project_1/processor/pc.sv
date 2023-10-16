@@ -19,7 +19,7 @@ module pc(
 	
 		if (rst == 0)
 			pc <= 0;
-		else if (load == 1)	
+		else if (load == 1)	 
 			pc <= pc_in;
 		else
 			pc <= pc;

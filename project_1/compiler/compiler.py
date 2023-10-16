@@ -984,7 +984,7 @@ registerDictionary = {
     "r15": "1111"
 }
 
-instructionElementsList = getinstructionElementsList('reverb.txt')
+instructionElementsList = getinstructionElementsList('test2.txt')
 
 instructionElementsList = riskControlUnit(instructionElementsList, typeDictionary, opcodeDictionary)
 

@@ -1,5 +1,5 @@
 loop:
-sumita r2, r15, 6
+igual r13, r15, end
 sumita r6, r15, 2
 sumita r14, r15, 0
 leq r3, r4, end
