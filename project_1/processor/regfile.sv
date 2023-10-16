@@ -10,7 +10,9 @@ module regfile(
 	
 	output [31:0] RD1,
 	output [31:0] RD2,
-	output [31:0] RD3
+	output [31:0] RD3,
+	output [10:0] R6_audio,
+	output R14_flag
 	);
 	
 	logic [31:0] R0, R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15;
@@ -136,8 +138,8 @@ module regfile(
 				4'd11: R11 = WD; // registro 11
 				4'd12: R12 = WD; // registro 12
 				4'd13: R13 = WD; // registro 13
-				4'd14: R14 = 31'd0; // registro 14
-				4'd15: R15 = WD;
+				4'd14: R14 = WD; // registro 14
+				4'd15: R15 = 32'd0;
 			
 			endcase
 		
@@ -152,6 +154,8 @@ module regfile(
 	assign RD1 = RD1_temp;
 	assign RD2 = RD2_temp;
 	assign RD3 = RD3_temp;
+	assign R6_audio = R6;
+	assign R14_flag = R14;
 
 	
 endmodule

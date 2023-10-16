@@ -1,13 +1,4 @@
 start:
-sumita r0, r14, 10500    
-sumita r4, r14, 4
-brinco loop
-loop:
-cargar r1, 2(r2)
-sumita r2, r2, 4
-sumita r3, r3, 1
-geq r3, r4, loop
-brinco end
-end:
-suma r7, r14, r14
-sumita r0, r14, 14
+cargar r10,0(r1)
+guardar r10,0(r8)
+sumita r0, r2, 140

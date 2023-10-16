@@ -28,8 +28,8 @@ module alu( input [31:0] A, B,
 			// caso corrimiento a logico a la derecha
 			3'b101: alu_out_temp = A >> B;
 			
-			// caso corrimiento a logico a la izquierda
-			3'b110: alu_out_temp = A << B;
+			// caso union
+			3'b110: alu_out_temp = A & B;
 
 			default: alu_out_temp = A + B; 
 		

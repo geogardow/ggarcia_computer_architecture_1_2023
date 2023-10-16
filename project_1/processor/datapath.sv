@@ -1,4 +1,4 @@
-module datapath (input clkFPGA, rst, start);
+module datapath (input clkFPGA, rst, start, output logic [10:0] R6_audio, output logic R14_flag);
 
 	//IF
 	logic [31:0] pc_in_if, pc_out_if, pc_plus1_if, instruction_if;
@@ -6,13 +6,14 @@ module datapath (input clkFPGA, rst, start);
 	//ID
 	logic [31:0] pc_id, extend_out_id, RD1_id, RD2_id, RD3_id;
 	logic [27:0] instr_27_0_id;
+	logic [10:0] R6_audio_temp;
 	logic [4:0] instr_29_25_id;
 	logic [3:0] instr_27_24_id, instr_20_17_id, instr_23_20_id,
 			instr_16_13_id, instr_24_21_id, RA1_id, RA2_id, RA3_id;
 	logic [2:0] ALUOp_id;
 	logic [1:0] instr_31_30_id, ImmSr_id;
 	logic BranchB_id, BranchI_id, BranchGEQ_id, BranchLEQ_id, RegDtn_id, MemToReg_id, MemRead_id, MemWrite_id,
-			ALUSrc_id, RegWrite_id, RegSrc2_id, RegSrc1_id;
+			ALUSrc_id, RegWrite_id, RegSrc2_id, RegSrc1_id, R14_flag_temp;
 	
 	//EX
 	logic [31:0] pc_plus_imm_ex, pc_ex, alu_op2_ex, alu_out_ex, RD1_ex, RD2_ex, RD3_ex, extend_ex;
@@ -64,7 +65,7 @@ module datapath (input clkFPGA, rst, start);
 	extend extend_id (instr_27_0_id, ImmSr_id, extend_out_id);
 
 	// instr_24_21_id = RA3_id
-	regfile regfile_id (RA1_id, RA2_id, instr_24_21_id, RA3_wb, data_mux_wb, RegWrite_wb, clk, rst, RD1_id, RD2_id, RD3_id);
+	regfile regfile_id (RA1_id, RA2_id, instr_24_21_id, RA3_wb, data_mux_wb, RegWrite_wb, clk, rst, RD1_id, RD2_id, RD3_id, R6_audio_temp, R14_flag_temp);
 
 	// ID/EX Segmentation
 	segment_id_ex id_ex (BranchB_id, BranchI_id, BranchGEQ_id, BranchLEQ_id, clk, rst, MemToReg_id, MemRead_id, MemWrite_id, ALUOp_id, ALUSrc_id, RegWrite_id,
@@ -95,5 +96,9 @@ module datapath (input clkFPGA, rst, start);
 
 	// WB
 	mux_2to1 #(.N(32)) mux_2to1_wb (alu_out_wb, data_out_wb, MemToReg_wb, data_mux_wb); //TODO: data_mux_id debería estar conectado a regfile
+	
+	
+	assign R6_audio = R6_audio_temp;
+	assign R14_flag = R14_flag_temp;
 
 endmodule

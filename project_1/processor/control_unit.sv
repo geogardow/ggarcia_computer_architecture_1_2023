@@ -62,6 +62,11 @@
 					begin
 						ALUOp = 3'b011;
 					end
+				// union
+				else if (func[4:0] == 5'b01011)
+					begin
+						ALUOp = 3'b110;
+					end
 			end
 		
 		// Instrucciones de Datos con inmediato:
@@ -114,7 +119,12 @@
 				if (func[4:0] == 5'b11010)
 					begin
 						ALUOp = 3'b110;
-					end    
+					end
+				// unioncita
+				if (func[4:0] == 5'b11100)
+					begin
+						ALUOp = 3'b110;
+					end        
 			end
 			
 		// Instrucciones de Control:
@@ -139,7 +149,7 @@
 						BranchGEQ = 0;
 					end
 				// leq instruction
-				if (func[4:3] == 2'b11)
+				if (func[4:3] == 2'b01)
 					begin
 						BranchB = 0;
 						BranchI = 0;
@@ -179,7 +189,7 @@
 				RegSrc1 = 1'b0;
 				
 				// guardar instruction
-				if (func[4] == 1'b1)
+				if (func[4:3] == 2'b01)
 					begin
 						MemToReg = 1'bx;
 						MemRead = 0;
@@ -187,7 +197,7 @@
 						RegWrite = 0;
 					end
 				// cargar instruction	
-				if (func[4] == 1'b0)
+				if (func[4:3] == 2'b00)
 					begin
 						MemToReg = 1;
 						MemRead = 1;
