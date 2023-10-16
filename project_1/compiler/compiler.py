@@ -117,7 +117,6 @@ def stallInsertionAfterLabel(instructionElementsList):
     for j in result:       
 
         if(len(j) == 1):
-
             result.insert(i + 1, stall)
 
         i += 1
@@ -505,7 +504,7 @@ def stallInsertionCase2(instructionElementsList, typeDictionary, opcodeDictionar
                             result.insert(i + 1, stall)
                             result.insert(i + 2, stall)
 
-            i += 1
+        i += 1
 
     return result[:-1]
 
@@ -985,7 +984,7 @@ registerDictionary = {
     "r15": "1111"
 }
 
-instructionElementsList = getinstructionElementsList('test2.txt')
+instructionElementsList = getinstructionElementsList('reverb.txt')
 
 instructionElementsList = riskControlUnit(instructionElementsList, typeDictionary, opcodeDictionary)
 
