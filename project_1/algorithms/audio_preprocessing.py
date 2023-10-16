@@ -19,12 +19,6 @@ def read_wav_file(path, sampling_frequency):
             if wav_file.getsampwidth() != 2:
                 print("The WAV file must have a sample width of 16 bits.")
                 return None
-            
-            print(wav_file.getframerate())
-            # Check if the WAV file's framerate matches the desired sampling frequency
-            if wav_file.getframerate() != sampling_frequency:
-                print("The WAV file's sampling frequency does not match the desired frequency.")
-                return None
 
             # Read audio samples from the WAV file
             audio_samples = np.frombuffer(wav_file.readframes(-1), dtype=np.int16)
@@ -33,9 +27,11 @@ def read_wav_file(path, sampling_frequency):
             if wav_file.getnchannels() == 2:
                 audio_samples = audio_samples[::2]
 
-            audio_samples_normalized = normalize_list(audio_samples)
-
-            return audio_samples_normalized
+            audio_samples_normalized = normalize_list(audio_samples)[:240000]
+            audio_resample = []
+            for i in range(160000):
+                audio_resample.append(audio_samples_normalized[int(1.5*i)])
+            return audio_resample
         
     except FileNotFoundError:
         print("File not found.")
@@ -44,8 +40,8 @@ def read_wav_file(path, sampling_frequency):
         print(f"An error occurred: {str(e)}")
         return None
     
-def get_q78_samples(samples):
-    samples_q78 = []
+def get_q114_samples(samples):
+    samples_q114 = []
     for element in samples:
         if element < 0:
             binary = "1"
@@ -61,53 +57,53 @@ def get_q78_samples(samples):
                 binary = binary + "1"
             else:
                 binary = binary + "0"
-        samples_q78.append(binary)
+        samples_q114.append(binary)
 
-    return samples_q78
+    return samples_q114
 
 
 # Example usage:
 file_path = "./project_1/algorithms/input_audio.wav"
-desired_sampling_frequency = 48000  # Change this to your desired sampling frequency
+desired_sampling_frequency = 32000  # Change this to your desired sampling frequency
 samples = read_wav_file(file_path, desired_sampling_frequency)
 if samples is not None:
-    print(samples)
-    samples_q78 = get_q78_samples(samples)
+    samples_q114 = get_q114_samples(samples)
 
 with open("./project_1/algorithms/audio.txt", 'w') as f:
-    for i, value in enumerate(samples_q78):
+    for i, value in enumerate(samples_q114):
         f.write(f"{value}\n")
+
+def getReverb(data, k, a):
+    result = []
+    for i in range(len(data)):
+        if i > k-1:
+            result.append((1-a)*data[i]+a*result[i-5])
+        else:
+            result.append((1-a)*data[i])
+    return result
+
+def getDeReverb(data, k, a):
+    result = []
+    for i in range(len(data)):
+        if i > k-1:
+            result.append((1/(1-a))*data[i]-(a/(1-a))*data[i-5])
+        else:
+            result.append((1/(1-a))*data[i])
+    return result
 
 example = samples[1129:1139]
 
-
-#y(n) = (1-a)*x(n)+a*y(n-k); k= 2400
-
-def getReverb(example):
-    result = []
-    for i in range(len(example)):
-        if i > 4:
-            result.append(0.4*example[i]+0.6*result[i-5])
-        else:
-            result.append(0.4*example[i])
-    return result
-
-def getDeReverb(example):
-    result = []
-    for i in range(len(example)):
-        if i > 4:
-            result.append(2.5*example[i]-1.5*example[i-5])
-        else:
-            result.append(2.5*example[i])
-    return result
-
-print(max(samples))
-print("\nLista original")
+print("\nLista Original")
 print(example)
-print("\nLista q114")
-print(samples_q78[1129:1139])
-print("\nLista resultado")
-print(getDeReverb(example))
+
+print("\n Lista Q1.14")
+print(samples_q114[1129:1139])
+
+print("\nLista Reverb")
+print(getReverb(example, 5, 0.6))
+
+print("\nLista DeReverb")
+print(getDeReverb(example, 5, 0.6))
 
 
 

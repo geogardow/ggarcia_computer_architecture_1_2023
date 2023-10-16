@@ -18,4 +18,4 @@ def convert_file(input_file, output_file):
         f_out.write("END;")
 
 
-convert_file("./audio.txt", "./audio.mif")
+convert_file("./project_1/algorithms/audio.txt", "./project_1/algorithms/audio.mif")
