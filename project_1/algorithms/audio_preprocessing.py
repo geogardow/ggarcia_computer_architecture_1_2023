@@ -11,7 +11,7 @@ def normalize_list(data):
     normalized_data = -1 + 2 * (data - min_value) / (max_value - min_value)
     return normalized_data
 
-def read_wav_file(path, sampling_frequency):
+def read_wav_file(path, sampling_rate, time):
     try:
         # Open the WAV file
         with wave.open(path, 'rb') as wav_file:
@@ -27,10 +27,10 @@ def read_wav_file(path, sampling_frequency):
             if wav_file.getnchannels() == 2:
                 audio_samples = audio_samples[::2]
 
-            audio_samples_normalized = normalize_list(audio_samples)[:240000]
+            audio_samples_normalized = normalize_list(audio_samples)[:wav_file.getframerate()*time]
             audio_resample = []
-            for i in range(160000):
-                audio_resample.append(audio_samples_normalized[int(1.5*i)])
+            for i in range(sampling_rate*time):
+                audio_resample.append(audio_samples_normalized[int((wav_file.getframerate()/sampling_rate)*i)])
             return audio_resample
         
     except FileNotFoundError:
@@ -62,51 +62,18 @@ def get_q114_samples(samples):
     return samples_q114
 
 
-# Example usage:
-file_path = "./project_1/algorithms/input_audio.wav"
-desired_sampling_frequency = 32000  # Change this to your desired sampling frequency
-samples = read_wav_file(file_path, desired_sampling_frequency)
-if samples is not None:
-    samples_q114 = get_q114_samples(samples)
+def makeTxt(file_name):
+    file_path = "./project_1/algorithms/"+file_name+".wav"
+    samples = read_wav_file(file_path, 32000, 5)
+    if samples is not None:
+        samples_q114 = get_q114_samples(samples)
 
-with open("./project_1/algorithms/audio.txt", 'w') as f:
-    for i, value in enumerate(samples_q114):
-        f.write(f"{value}\n")
-
-def getReverb(data, k, a):
-    result = []
-    for i in range(len(data)):
-        if i > k-1:
-            result.append((1-a)*data[i]+a*result[i-5])
-        else:
-            result.append((1-a)*data[i])
-    return result
-
-def getDeReverb(data, k, a):
-    result = []
-    for i in range(len(data)):
-        if i > k-1:
-            result.append((1/(1-a))*data[i]-(a/(1-a))*data[i-5])
-        else:
-            result.append((1/(1-a))*data[i])
-    return result
-
-example = samples[1129:1139]
-
-print("\nLista Original")
-print(example)
-
-print("\n Lista Q1.14")
-print(samples_q114[1129:1139])
-
-print("\nLista Reverb")
-print(getReverb(example, 5, 0.6))
-
-print("\nLista DeReverb")
-print(getDeReverb(example, 5, 0.6))
+    with open("./project_1/algorithms/"+file_name+".txt", 'w') as f:
+        for i, value in enumerate(samples_q114):
+            f.write(f"{value}\n")
 
 
 
 
-    
-
+makeTxt("audioSinReverb")
+makeTxt("audioConReverb")
