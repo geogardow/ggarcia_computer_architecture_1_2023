@@ -147,8 +147,7 @@ _storeValue:
 	
 	suma r14,r15,r15
 	sumita r0,r15,65535
-	multi r0,r0,2
-	sumita r0,r0,28930 //buffer
+	sumita r0,r0,62465 //cantidad de datos
 	geq r4,r0,_end
 
 	sumita r12,r12,1
