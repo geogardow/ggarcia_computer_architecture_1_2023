@@ -21,9 +21,9 @@ initial begin
 	R13_flag_out = 1'b0;
 	R6_audio = 10'd0;
 	#1;
-	rst = 1'b1;
-	#1;
 	rst = 1'b0;
+	#1;
+	rst = 1'b1;
 	
 	// R13_flag = 0 --- debe saltar a la etiqueta end
 	#200
@@ -34,9 +34,9 @@ initial begin
 	#200
 	// Se hace el reset y se toma a R13_flag como 1, entonces no salta a la etiqueta end
 	#1;
-	rst = 1'b1;
-	#1;
 	rst = 1'b0;
+	#1;
+	rst = 1'b1;
 	#200
 
 	// Este cambio no modifica el codigo 
@@ -45,9 +45,9 @@ initial begin
 	#200
 	// Se hace un reset, entonces el codigo salta a la etiqueta end 
 	#1;
-	rst = 1'b1;
-	#1;
 	rst = 1'b0;
+	#1;
+	rst = 1'b1;
 
 
 

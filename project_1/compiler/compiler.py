@@ -810,7 +810,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
                 direction = signExtension(direction, instructionType, opcode, pointerLine)
 
                 instruction = instructionType + opcode + register1 + register2 + direction
-                #print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + direction)
+                print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + direction)
 
                 with open("data.txt", "a+") as file:
                     file.write( " ".join(elements)+ "  ")
@@ -824,7 +824,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
                 direction = signExtension(direction, instructionType, opcode, pointerLine)
 
                 instruction = instructionType + opcode + direction
-                #print(instructionType + " " + opcode + " " + direction)
+                print(instructionType + " " + opcode + " " + direction)
 
                 with open("data.txt", "a+") as file:
                     file.write(" ".join(elements)+ "  ")
@@ -841,7 +841,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
             register2 = registerDictionary[elements[3]]       
 
             instruction = instructionType + opcode + fillingMemory + register1 + register2 + immediate
-            #print(instructionType + " " + opcode + " " + fillingMemory + " " + register1 + " " + register2 + " " + immediate)
+            print(instructionType + " " + opcode + " " + fillingMemory + " " + register1 + " " + register2 + " " + immediate)
             
             with open("data.txt", "a+") as file:
                 file.write(" ".join(elements)+ "  ")
@@ -863,7 +863,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
 
                 instruction = instructionType + opcode + register1 + register2 + immediate
 
-                #print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + immediate)
+                print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + immediate)
 
                 with open("data.txt", "a+") as file:
                     file.write(" ".join(elements) + "  ")
@@ -878,7 +878,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
 
                 instruction = instructionType + opcode + register1 + register2 + register3 + fillingData
 
-                #print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + register3 + " " + fillingData)
+                print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + register3 + " " + fillingData)
 
                 with open("data.txt", "a+") as file:
                     file.write( " ".join(elements)+ "  ")

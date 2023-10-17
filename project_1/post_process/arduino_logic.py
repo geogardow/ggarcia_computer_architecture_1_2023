@@ -23,13 +23,13 @@ def generate_audio_file(audio_file):
         if (flag_current_state == 1 and flag_last_state == 0): 
                 print("reading from FPGA...")
                 data = []
-                for i in range (8):
+                for i in range (11):
                     data.append(str(board.digital_read(i+3)[0]))
-                with open(audio_file, "r+") as f:
+                with open(audio_file, "a+" ) as f:
                     audio_string = ''.join(data)
                     print(audio_string)
                     f.write(audio_string + '\n')
-                    if(len(f.readlines()) == FILE_LIMIT):
+                    if(len(f.readlines()) == FILE_LI MIT):
                         print("Process done!")
                         is_processing = False
         flag_last_state  = flag_current_state
