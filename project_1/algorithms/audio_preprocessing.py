@@ -64,7 +64,7 @@ def get_q114_samples(samples):
 
 def makeTxt(file_name):
     file_path = "./project_1/algorithms/"+file_name+".wav"
-    samples = read_wav_file(file_path, 32000, 5)
+    samples = read_wav_file(file_path, 32000, 4)
     if samples is not None:
         samples_q114 = get_q114_samples(samples)
 
