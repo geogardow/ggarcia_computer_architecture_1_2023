@@ -68,14 +68,14 @@ _addExtra:
 	cad r2,r2,14
 	unioncita r2,r2,1
 	
-	mul r7,r3,r2
+	mult r7,r3,r2
 	
 	suma r8,r8,r7
 
 	sumita r1,r15,3 //outPointer
 	cargar r10,0(r1)
 	sumita r3,r15,4 //buffer
-	suma r3,r3,10
+	sumita r3,r3,10
 	
 	cargar r2,0(r3)
 
@@ -101,7 +101,7 @@ _neg:
 _pos:
 	sumita r2,r15,32768
 	geq r8,r2,_equalSign
-	sumita r2,r15,r15
+	suma r2,r15,r15
 	brinco _equalSign
 
 _equalSign:
@@ -145,7 +145,7 @@ _storeValue:
 	sumita r9,r9,1
 	sumita r4,r4,1
 	
-	sumita r14,r15,r15
+	suma r14,r15,r15
 	sumita r0,r15,4 //buffer
 	geq r4,r0,_end
 
@@ -163,7 +163,7 @@ _giveSpace:
 	
 	guardar r10,0(r8)
 
-	sumita r11,r15,r15
+	suma r11,r15,r15
 
 	sumita r8,r15,4 //buffer
 
@@ -174,7 +174,7 @@ _giveSpace:
 	sumita r10,r10,1
 	guardar r10,0(r1)
 
-	sub r9,r9,1
+	restita r9,r9,1
 
 	brinco _storeValue
 
@@ -185,7 +185,7 @@ _startD:
 	sumita r12,r15,0
     brinco _loopD
 
-_loopD: 
+_loopD:
 	sumita r1,r15,65535 //datos
 	multi r1,r1,2
 	sumita r1,r1,30534
@@ -195,7 +195,7 @@ _loopD:
 	sumita r1,r15,32767
 	union r1,r2,r1
 	cad r1,r1,2
-	sumita R3,r15,32768
+	sumita r3,r15,32768
 	union r3,r2,r3
 	suma r2,r1,r3
 
@@ -205,7 +205,7 @@ _loopD:
 	union r5,r5,r1
 
 	cad r2,r2,12 
-	union r2,r2,7 
+	unioncita r2,r2,7 
     
 
 	sumita r3,r15,2 
@@ -230,7 +230,7 @@ _loopD:
 	suma r6,r6,r7
 
 	sumita r0,r15,6
-	qeq r4,r0,_addExtraD
+	geq r4,r0,_addExtraD
 
 	sumita r1,r15,65535 //datos
 	multi r1,r1,2
@@ -258,8 +258,8 @@ _addExtraD:
 	multi r1,r1,2
 	sumita r1,r1,30534
     sumita r2,r15,1600
-    SUB R1, R1, R2
-    ADD R1, R1, R12
+    resta r1, r1, r2
+    suma r1, r1, r12
     cargar r2,0(r1)
 
     sumita r1,r15,4095
@@ -319,7 +319,7 @@ _negD:
 _posD:
 	sumita r2,r15,32768
 	geq r8,r2,_equalSignD
-	sumita r2,r15,r15
+	suma r2,r15,r15
 	brinco _equalSignD
 
 _equalSignD:
@@ -371,7 +371,7 @@ _storeValueD:
 	sumita r9,r9,1
 	sumita r4,r4,1
 	
-	sumita r14,r15,r15
+	suma r14,r15,r15
 	sumita r0,r15,65535
 	multi r0,r0,2
 	sumita r0,r0,28930
@@ -391,7 +391,7 @@ _giveSpaceD:
 
 	guardar r10,0(r8)
 
-	sumita r11,r15,r15
+	suma r11,r15,r15
 
 	sumita r8,r15,4 //buffer
 	suma r8,r8,r10
@@ -401,9 +401,12 @@ _giveSpaceD:
 	sumita r10,r10,1
 	guardar r10,0(r1)
 
-	sub r9,r9,1
+	restita r9,r9,1
 
 	brinco _storeValueD
 
 _end:
 	sumita r7,r15,1
+	sumita r7,r15,10
+	sumita r7,r15,10
+	sumita r7,r15,10
