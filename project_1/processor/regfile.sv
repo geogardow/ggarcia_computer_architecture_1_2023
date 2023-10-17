@@ -165,7 +165,7 @@ module regfile(
 	assign RD1 = RD1_temp;
 	assign RD2 = RD2_temp;
 	assign RD3 = RD3_temp;
-	assign R6_audio = R6;
+	assign R6_audio = R6[15:5];
 	assign R14_flag = R14;
 	assign R13_flag_out = R13;
 

@@ -26,6 +26,7 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 	//MEM
 	logic [31:0] alu_out_mem, RD3_WD_mem, data_out_mem;
 	logic [3:0] RA3_mem;
+	logic [15:0] mem_out;
 	logic MemRead_mem, MemWrite_mem, RegWrite_mem, MemToReg_mem;
 	
 	 
@@ -87,8 +88,10 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 						   alu_out_mem, RD3_WD_mem, RA3_mem);
 
 	// MEM
-	ram mem(.address(alu_out_mem[15:0]), .clock(clk_mem), .data(RD3_WD_mem), .wren(MemWrite_mem), .q(data_out_mem)); 
+	ram4 mem(.address(alu_out_mem[18:0]), .clock(clk_mem), .data(RD3_WD_mem[15:0]), .wren(MemWrite_mem), .q(mem_out)); 
 
+	extend_mem extend_1(mem_out, data_out_mem);
+	
 	// MEM/WB Segmentation
 	segment_mem_wb mem_wb (clk, rst, MemToReg_mem, RegWrite_mem, 
 					data_out_mem, alu_out_mem, RA3_mem,

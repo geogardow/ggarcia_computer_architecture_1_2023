@@ -8,6 +8,6 @@ def remove_blank_lines_from_file(file_path):
         file.writelines(non_blank_lines)
 
 
-script_file_path = 'reverb.txt'
+script_file_path = 'fullcode.txt'
 
 remove_blank_lines_from_file(script_file_path)
