@@ -1,0 +1,227 @@
+_start:
+	sumita r4,r15,1
+	sumita r9,r15,0
+	sumita r12,r15,0
+
+_loop: 
+	sumita r1,r15,65535 //datos
+	multi r1,r1,2
+	sumita r1,r1,30534
+    suma r1,r1,r12
+	cargar r2,0(r1)
+
+	sumita r1,r15,32767
+	union r1,r2,r1
+	cad r1,r1,2
+	sumita R3,r15,32768
+	union r3,r2,r3
+	suma r2,r1,r3
+
+	suma r5,r2,r15
+    
+	sumita r1,r15,4095
+	union r5,r5,r1
+
+	cad r2,r2,12 
+	union r2,r2,7 
+    
+
+	sumita r3,r15,2 
+	mult r7,r3,r2
+	cli r7,r7,12
+	suma r6,r6,r7
+
+	sumita r3,r15,2048
+	mult r7,r3,r5
+	cad r7,r7,12
+	suma r6, r6, r7
+
+
+	mult r7,r3,r2
+	suma r6,r6,r7
+
+
+	sumita r3,r15,2 
+	mult r7,r3,r5
+    
+
+	suma r6,r6,r7
+
+	sumita r0,r15,6
+	qeq r4,r0,_addExtra
+
+	sumita r1,r15,65535 //datos
+	multi r1,r1,2
+	sumita r1,r1,30534
+    suma r1,r1,r12
+	cargar r2,0(r1)
+
+	sumita r1,r15,32768
+	union r1,r2,r1
+
+	suma r6,r6,r1
+
+	sumita r3,r15,32767
+	union r3,r6,r3
+	suma r2,r15,r1
+
+    sumita r1,r15,4096
+    geq r3,r1,_adjust
+
+	brinco _preStore
+
+_addExtra:
+    suma r8,r15,r15
+	sumita r1,r15,65535 //datos
+	multi r1,r1,2
+	sumita r1,r1,30534
+    sumita r2,r15,1600
+    SUB R1, R1, R2
+    ADD R1, R1, R12
+    cargar r2,0(r1)
+
+    sumita r1,r15,4095
+    union r5,r5,r1
+
+
+    cad r2,r2,12 
+    unioncita r2,r2,7
+    
+
+    sumita r3,r15,2
+    mult r7,r3,r2
+    cli r7,r7,12
+    suma r8,r8,r7
+
+
+    sumita r3,r15,2048
+    mult r7,r3,r5
+    cad r7,r7,12
+    suma r8,r8,r7
+
+    mult r7,r3,r2
+    suma r8,r8,r7
+
+    sumita r3,r15,1
+    mult r7,r3,r5
+    
+    suma r8,r8,r7
+
+
+    sumita r1,r15,65535 //datos
+	multi r1,r1,2
+	sumita r1,r1,30534
+    sumita r2,r15,1600
+    resta r1,r1,r2
+    suma r1,r1,r12
+    cargar r2,0(r1) 
+
+
+    sumita r1,r15,32768
+    union r1,r2,r1
+
+ 
+    suma r8,r8,r1 
+
+    sumita r1,r15,32768
+    geq r6,r1,_neg
+    brinco _pos
+
+_neg:
+	sumita r2,r15,32768
+	geq r8,r2,_equalSign
+	suma r2,r15,r8
+	suma r8,r15,r6
+	suma r6,r15,r2
+	brinco _notEqualSign
+_pos:
+	sumita r2,r15,32768
+	geq r8,r2,_equalSign
+	sumita r2,r15,r15
+	brinco _equalSign
+
+_equalSign:
+	sumita r1,r15,32767
+	union r6,r6,r1
+	union r8,r8,r1
+	union r6,r6,r8
+	sumita r1,r15,16384
+	geq r6,r1,_adjust
+	suma r6,r6,r2
+	brinco _storeValue
+
+_notEqualSign:
+	sumita r1,r15,32767
+	union r6,r6,r1
+	union r8,r8,r1
+	resta r6,r6,r8
+	geq r6,r15,_storeValue
+	suma r6,r6,r2
+	brinco _storeValue
+
+_adjust:
+	sumita r6,r15,16384
+	suma r6,r6,r2
+	brinco _storeValue
+
+_preStore:
+	sumita r1,r15,32767
+    union r1,r6,r1
+    cli r1, r1,2
+    sumita r2,r1,32768
+    union r2,r6,r2
+    suma r6,r1,r2
+    brinco _storeValue
+
+_storeValue:
+    sumita r0,r15,1600	
+	geq r9,r0,_giveSpace
+	
+	sumita r1,r15,2 //inPointer
+	cargar r10,0(r1)
+	sumita r8,r15,4 //buffer
+	suma r8,r8,r10
+	sumita r14,r14,1
+	guardar r6,0(r8)
+	sumita r10,r10,1
+	guardar r10,0(r1)
+	
+	sumita r9,r9,1
+	sumita r4,r4,1
+	
+	sumita r14,r15,r15
+	sumita r0,r15,65535
+	multi r0,r0,2
+	sumita r0,r0,28930
+	geq r4,r0,_end
+
+	sumita r12,r12,1
+	suma r5,r15,r15
+	suma r6,r15,r15
+	
+	brinco _loop
+
+_giveSpace:
+	sumita r8,r15,2 //inPointer
+	
+	sumita r1,r15,3 //outPointer
+	cargar r10,0(r1)
+
+	guardar r10,0(r8)
+
+	sumita r11,r15,r15
+
+	sumita r8,r15,4 //buffer
+	suma r8,r8,r10
+	
+	guardar r11,0(r8)
+	
+	sumita r10,r10,1
+	guardar r10,0(r1)
+
+	sub r9,r9,1
+
+	brinco _storeValue
+
+_end:
+	sumita r7,r15,1

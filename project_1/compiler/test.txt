@@ -1,0 +1,4 @@
+start:
+cargar r10,0(r1)
+guardar r10,0(r8)
+sumita r0, r2, 140

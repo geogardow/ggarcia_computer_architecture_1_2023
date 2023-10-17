@@ -1,0 +1,11 @@
+loop:
+igual r13, r15, end
+sumita r6, r15, 2
+sumita r14, r15, 0
+leq r3, r4, end
+sumita r2, r15, 0
+sumita r3, r15, 0
+end:
+suma r7, r14, r3
+sumita r14, r15, 1
+sumita r6, r15, 60
