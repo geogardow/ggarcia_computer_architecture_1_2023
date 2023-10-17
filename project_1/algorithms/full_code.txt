@@ -189,8 +189,7 @@ _startD:
 
 _loopD:
 	sumita r1,r15,65535 //datos
-	multi r1,r1,2
-	sumita r1,r1,30534
+	sumita r1,r1,64069
     suma r1,r1,r12
 	cargar r2,0(r1)
 
@@ -257,8 +256,7 @@ _loopD:
 _addExtraD:
     suma r8,r15,r15
 	sumita r1,r15,65535 //datos
-	multi r1,r1,2
-	sumita r1,r1,30534
+	sumita r1,r1,64069
     sumita r2,r15,1600
     resta r1, r1, r2
     suma r1, r1, r12
@@ -293,8 +291,7 @@ _addExtraD:
 
 
     sumita r1,r15,65535 //datos
-	multi r1,r1,2
-	sumita r1,r1,30534
+	sumita r1,r1,64069
     sumita r2,r15,1600
     resta r1,r1,r2
     suma r1,r1,r12
@@ -375,8 +372,7 @@ _storeValueD:
 	
 	suma r14,r15,r15
 	sumita r0,r15,65535
-	multi r0,r0,2
-	sumita r0,r0,28930
+	sumita r0,r0,62465
 	geq r4,r0,_end
 
 	sumita r12,r12,1
