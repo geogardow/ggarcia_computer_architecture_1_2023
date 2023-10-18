@@ -9,6 +9,7 @@ _start:
     brinco _loop
 
 _loop:
+	suma r14,r15,r15
 	sumita r1,r15,0 // minus_a
 	cargar r3,0(r1)
 
@@ -130,6 +131,7 @@ _adjust:
 
 
 _storeValue:
+	sumita r14,r14,1
 	suma r14,r15,r15
 	sumita r0,r15,1600	
 	geq r9,r0,_giveSpace
@@ -138,7 +140,6 @@ _storeValue:
 	cargar r10,0(r1)
 	sumita r8,r15,4 //buffer
 	suma r8,r8,r10
-	sumita r14,r14,1
 	guardar r6,0(r8)
 	sumita r10,r10,1
 	guardar r10,0(r1)
@@ -187,6 +188,7 @@ _startD:
     brinco _loopD
 
 _loopD:
+	suma r14,r15,r15
 	sumita r1,r15,65535 //datos
 	sumita r1,r1,64069
     suma r1,r1,r12
@@ -353,6 +355,7 @@ _preStoreD:
     brinco _storeValueD
 
 _storeValueD:
+	sumita r14,r14,1
 	suma r14,r15,r15
     sumita r0,r15,1600	
 	geq r9,r0,_giveSpaceD
@@ -361,7 +364,6 @@ _storeValueD:
 	cargar r10,0(r1)
 	sumita r8,r15,4 //buffer
 	suma r8,r8,r10
-	sumita r14,r14,1
 	guardar r6,0(r8)
 	sumita r10,r10,1
 	guardar r10,0(r1)
