@@ -13,33 +13,33 @@ DATA_PIN_7 = 10
 DATA_PIN_8 = 11
 DATA_PIN_9 = 12
 DATA_PIN_10 = 13
-FILE_LIMIT = 1600
 
-def generate_audio_file(audio_file):
+def generate_audio_file():
     flag_last_state = 0
-    is_processing = True
-    while is_processing:
+    is_processing = 0
+    final_audio = []
+    while is_processing < 128000:
         flag_current_state  = board.digital_read(FLAG_PIN)[0]
         if (flag_current_state == 1 and flag_last_state == 0): 
-                print("reading from FPGA...")
-                data = []
-                for i in range (11):
-                    data.append(str(board.digital_read(i+3)[0]))
-                with open(audio_file, "a+" ) as f:
-                    audio_string = ''.join(data)
-                    print(audio_string)
-                    f.write(audio_string + '\n')
-                    if(len(f.readlines()) == FILE_LI MIT):
-                        print("Process done!")
-                        is_processing = False
-        flag_last_state  = flag_current_state
-        time.sleep(0.1)
+            print(is_processing)
+            data = []
+            for i in range (11):
+                data.append(str(board.digital_read(i+3)[0]))
+            final_audio.append(data)
+            is_processing += 1
+        flag_last_state  = flag_current_state  
+    return final_audio
 
 def main():
-    while True:
-        print("Starting process...")
-        filename = time.strftime("%Y_%m_%d__%I_%M_%S_%p") + ".txt"
-        generate_audio_file(filename)
+    print("Starting process...")
+    filename = time.strftime("%Y_%m_%d__%I_%M_%S_%p") + ".txt"
+    audio = generate_audio_file()   
+    with open(filename, "a+" ) as f:
+        for data in audio:
+            audio_string = ''.join(data)
+            print(audio_string)
+            f.write(audio_string + '\n')
+    print("Process done!")
 
 
 board = pymata4.Pymata4()

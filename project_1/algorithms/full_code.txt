@@ -54,7 +54,7 @@ _addExtra:
 	sumita r1,r15,3 //outPointer
 	cargar r10,0(r1)
 	
-	sumita r8,r15,1 //buffer
+	sumita r8,r15,4 //buffer
 	suma r8,r8,r10
 	
 	cargar r2,0(r8)
@@ -130,6 +130,7 @@ _adjust:
 
 
 _storeValue:
+	suma r14,r15,r15
 	sumita r0,r15,1600	
 	geq r9,r0,_giveSpace
 	
@@ -145,7 +146,6 @@ _storeValue:
 	sumita r9,r9,1
 	sumita r4,r4,1
 	
-	suma r14,r15,r15
 	sumita r0,r15,65535
 	sumita r0,r0,62465 //cantidad de datos
 	geq r4,r0,_end
@@ -353,6 +353,7 @@ _preStoreD:
     brinco _storeValueD
 
 _storeValueD:
+	suma r14,r15,r15
     sumita r0,r15,1600	
 	geq r9,r0,_giveSpaceD
 	
@@ -368,8 +369,7 @@ _storeValueD:
 	sumita r9,r9,1
 	sumita r4,r4,1
 	
-	suma r14,r15,r15
-	sumita r0,r15,65535
+	sumita r0,r15,65535 //cantidad de datos
 	sumita r0,r0,62465
 	geq r4,r0,_end
 

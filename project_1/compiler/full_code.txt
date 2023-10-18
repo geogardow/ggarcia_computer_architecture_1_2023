@@ -7,7 +7,7 @@ _start:
 	sumita r12,r15,0
     brinco _loop
 _loop:
-	sumita r1,r15,0 
+	sumita r1,r15,0
 	cargar r3,0(r1)
 	sumita r1,r15,1604 
 	suma r1,r1,r12
@@ -36,7 +36,7 @@ _addExtra:
 	cargar r3,0(r1)
 	sumita r1,r15,3 
 	cargar r10,0(r1)
-	sumita r8,r15,1 
+	sumita r8,r15,4 
 	suma r8,r8,r10
 	cargar r2,0(r8)
 	suma r5, r2, r15
@@ -92,6 +92,7 @@ _adjust:
 	suma r6,r6,r2
 	brinco _storeValue
 _storeValue:
+	suma r14,r15,r15
 	sumita r0,r15,1600	
 	geq r9,r0,_giveSpace
 	sumita r1,r15,2 
@@ -104,10 +105,8 @@ _storeValue:
 	guardar r10,0(r1)
 	sumita r9,r9,1
 	sumita r4,r4,1
-	suma r14,r15,r15
 	sumita r0,r15,65535
-	multi r0,r0,2
-	sumita r0,r0,28930 
+	sumita r0,r0,62465 
 	geq r4,r0,_end
 	sumita r12,r12,1
 	suma r5,r15,r15
@@ -163,8 +162,7 @@ _loopD:
 	sumita r0,r15,1601
 	geq r4,r0,_addExtraD
 	sumita r1,r15,65535 
-	multi r1,r1,2
-	sumita r1,r1,30534
+	sumita r1,r1,64069
     suma r1,r1,r12
 	cargar r2,0(r1)
 	sumita r1,r15,32768
@@ -255,6 +253,7 @@ _preStoreD:
     suma r6,r1,r2
     brinco _storeValueD
 _storeValueD:
+	suma r14,r15,r15
     sumita r0,r15,1600	
 	geq r9,r0,_giveSpaceD
 	sumita r1,r15,2 
@@ -267,8 +266,7 @@ _storeValueD:
 	guardar r10,0(r1)
 	sumita r9,r9,1
 	sumita r4,r4,1
-	suma r14,r15,r15
-	sumita r0,r15,65535
+	sumita r0,r15,65535 
 	sumita r0,r0,62465
 	geq r4,r0,_end
 	sumita r12,r12,1
