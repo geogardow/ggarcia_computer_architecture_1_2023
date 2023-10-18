@@ -233,8 +233,7 @@ _loopD:
 	geq r4,r0,_addExtraD
 
 	sumita r1,r15,65535 //datos
-	multi r1,r1,2
-	sumita r1,r1,30534
+	sumita r1,r1,64069
     suma r1,r1,r12
 	cargar r2,0(r1)
 
