@@ -33,3 +33,4 @@ module extend_tb();
         ImmSrc = 2'b11;
 
     end
+endmodule

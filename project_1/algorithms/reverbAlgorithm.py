@@ -8,6 +8,6 @@ def getReverb(data, k, a):
         else:
             result.append((1-a)*data[i])
     return result
-file_path = "./project_1/algorithms/audioSinReverb.wav"
+file_path = "algorithms\\audioSinReverb.wav"
 reverbSamples = getReverb(read_wav_file(file_path, 32000, 5),1600, 0.6)
 print(reverbSamples)
