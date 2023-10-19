@@ -125,7 +125,7 @@ _notEqualSign:
 	brinco _storeValue
 
 _adjust:
-	sumita r6,r15,16384
+	unioncita r6,r6,32767
 	suma r6,r6,r2
 	brinco _storeValue
 
@@ -340,7 +340,7 @@ _notEqualSignD:
 	brinco _storeValueD
 
 _adjustD:
-	sumita r6,r15,16384
+	unioncita r6,r6,32767
 	suma r6,r6,r2
 	brinco _storeValueD
 
