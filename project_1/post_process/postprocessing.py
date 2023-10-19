@@ -15,6 +15,7 @@ def create_audio(audio_data):
 
         # Convert and write the audio data to the file
         audio_array = array.array('h', [int(x * 32767) for x in audio_data])  # Scale to 16-bit range
+        #print(audio_array)
         wf.writeframes(audio_array.tobytes())
     print("WAV file created successfully.")
 
