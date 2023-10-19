@@ -782,6 +782,9 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
     # variable to know the number of the current line
     pointerLine = 0
 
+    #file to write data
+    data_path = "./project_1/compiler/data.txt"
+
     for elements in instructionElementsList:
 
         pointerLine += 1
@@ -812,7 +815,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
                 instruction = instructionType + opcode + register1 + register2 + direction
                 print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + direction)
 
-                with open("data.txt", "a+") as file:
+                with open(data_path, "a+") as file:
                     file.write( " ".join(elements)+ "  ")
                     file.write(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + direction + '\n')
 
@@ -826,7 +829,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
                 instruction = instructionType + opcode + direction
                 print(instructionType + " " + opcode + " " + direction)
 
-                with open("data.txt", "a+") as file:
+                with open(data_path, "a+") as file:
                     file.write(" ".join(elements)+ "  ")
                     file.write(instructionType + " " + opcode + " " + direction + '\n')
 
@@ -843,7 +846,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
             instruction = instructionType + opcode + fillingMemory + register1 + register2 + immediate
             print(instructionType + " " + opcode + " " + fillingMemory + " " + register1 + " " + register2 + " " + immediate)
             
-            with open("data.txt", "a+") as file:
+            with open(data_path, "a+") as file:
                 file.write(" ".join(elements)+ "  ")
                 file.write(instructionType + " " + opcode + " " + fillingMemory + " " + register1 + " " + register2 + " " + immediate+ '\n')
 
@@ -865,7 +868,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
 
                 print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + immediate)
 
-                with open("data.txt", "a+") as file:
+                with open(data_path, "a+") as file:
                     file.write(" ".join(elements) + "  ")
                     file.write(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + immediate + '\n')
 
@@ -880,7 +883,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
 
                 print(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + register3 + " " + fillingData)
 
-                with open("data.txt", "a+") as file:
+                with open(data_path, "a+") as file:
                     file.write( " ".join(elements)+ "  ")
                     file.write(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + register3 + " " + fillingData+ '\n')
         #print(" ")
