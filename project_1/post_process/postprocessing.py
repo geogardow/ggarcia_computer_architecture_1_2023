@@ -53,7 +53,3 @@ audio_path = folder_path + 'script0_jueves_prueba2.wav'
 values = file_to_list(file_name)
 q19_valules = q19_to_decimal(values)
 create_audio(q19_valules, audio_path)
-
-#print('Values in the list [1129:1139]:', values[1129:1139])
-#print('Total number of values:', len(q19_valules))
-#print(q19_valules)
