@@ -10,4 +10,4 @@ def getReverb(data, k, a):
     return result
 file_path = "./project_1/algorithms/audioSinReverb.wav"
 reverbSamples = getReverb(read_wav_file(file_path, 32000, 5),1600, 0.6)
-print(reverbSamples[1000:1100])
+print(reverbSamples)
