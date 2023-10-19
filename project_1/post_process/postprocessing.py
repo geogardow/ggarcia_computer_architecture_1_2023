@@ -6,7 +6,7 @@ def create_audio(audio_data):
 
     sample_width = 2  # 8 bytes (64-bit)
     num_channels = 1  # Mono audio
-    sample_rate = 32000  # 44.1 kHz sample rate
+    sample_rate = 32000 
 
     with wave.open("output.wav", "w") as wf:
         wf.setnchannels(num_channels)
