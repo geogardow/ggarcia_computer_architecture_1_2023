@@ -17,7 +17,6 @@
 *.qws
 *.rpt
 *.smsg
-*.sof
 *.sopc_builder
 *.summary
 *.tcl
@@ -35,5 +34,4 @@
 */*_sim/
 */incremental_db/*
 db/*
-*/output_files/*
 PLLJ_PLLSPE_INFO.txt

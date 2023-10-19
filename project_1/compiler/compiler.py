@@ -786,7 +786,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
 
         pointerLine += 1
 
-        print("elements = ", elements)        
+        #print("elements = ", elements)        
             
         instructionType = typeDictionary[elements[0]]
         opcode = opcodeDictionary[elements[0]]
@@ -883,7 +883,7 @@ def binaryInstructions(filename, instructionElementsList, typeDictionary, opcode
                 with open("data.txt", "a+") as file:
                     file.write( " ".join(elements)+ "  ")
                     file.write(instructionType + " " + opcode + " " + register1 + " " + register2 + " " + register3 + " " + fillingData+ '\n')
-        print(" ")
+        #print(" ")
 
         binaryCodeFile.write(instruction + "\n")
 
@@ -912,6 +912,14 @@ def convert_to_mif(input_file, output_file):
         file.write(mif_content)
 
 
+def remove_blank_lines_from_file(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    non_blank_lines = [line for line in lines if line.strip()]
+
+    with open(file_path, 'w') as file:
+        file.writelines(non_blank_lines)
 
 
 # instr type dictionary 
@@ -984,15 +992,21 @@ registerDictionary = {
     "r15": "1111"
 }
 
-instructionElementsList = getinstructionElementsList('test2.txt')
+folder_path = "./project_1/compiler/"
+
+script_file_path = folder_path + 'full_code.txt'
+
+remove_blank_lines_from_file(script_file_path)
+
+instructionElementsList = getinstructionElementsList(folder_path + 'full_code.txt')
 
 instructionElementsList = riskControlUnit(instructionElementsList, typeDictionary, opcodeDictionary)
 
 labelDictionary, instructionElementsList = getLabelDictionary(instructionElementsList)
 
-binaryInstructions('binaryCode.txt', instructionElementsList, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
+binaryInstructions(folder_path + 'binaryCode.txt', instructionElementsList, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
 
-input_file = 'BinaryCode.txt'
-output_file = 'output.mif'
+input_file = folder_path + 'BinaryCode.txt'
+output_file = folder_path + 'output.mif'
 
 convert_to_mif(input_file, output_file)

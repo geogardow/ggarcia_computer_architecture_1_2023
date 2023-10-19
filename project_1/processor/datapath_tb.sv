@@ -1,10 +1,10 @@
 `timescale 1 ps / 1 ps
 module datapath_tb();
 
-logic clkFPGA, rst, R14_flag, R13_flag, R13_flag_out;
+logic clkFPGA, rst, R14_flag, R13_flag, R13_flag_out, finish;
 logic [10:0] R6_audio;
 
-datapath dut(clkFPGA, rst, R13_flag, R6_audio, R14_flag, R13_flag_out);
+datapath dut(clkFPGA, rst, R13_flag, R6_audio, R14_flag, R13_flag_out, finish);
 	
 
 	 always begin
@@ -20,6 +20,7 @@ initial begin
 	R13_flag = 1'b0;
 	R13_flag_out = 1'b0;
 	R6_audio = 10'd0;
+	finish = 1'b0;
 	#1;
 	rst = 1'b1;
 	#1;

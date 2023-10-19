@@ -27,6 +27,6 @@ module pc(
 	end
 			
 	//assign pc_out = pc_temp;
-	assign pc_out = pc;
+	assign pc_out = pc == 32'd1024 ? 32'd1023 : pc;
 	
 endmodule 

@@ -184,7 +184,7 @@
 				BranchGEQ = 0;
 				ALUSrc = 1;
 				ALUOp = 3'b000;
-				ImmSrc = 2'b01;
+				ImmSrc = 2'b10;
 				RegSrc2 = 1'bx;
 				RegSrc1 = 1'b0;
 				

@@ -1,0 +1,38 @@
+# Copyright (C) 2022  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+
+# Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
+# File: C:\Users\dmeji\OneDrive - Estudiantes ITCR\TEC\Semestres\IIS2023\Arquitectura de Computadores I\ggarcia_computer_architecture_1_2023\project_1\processor\pipeline.csv
+# Generated on: Tue Oct 17 01:26:04 2023
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Transceiver Analog Settings Protocol,VCCR_GXB/VCCT_GXB Voltage,Transceiver I/O Pin Termination,Transceiver Dedicated Refclk Pin Termination,Transmitter Common Mode Driver Voltage,Transmitter Slew Rate Control,Transmitter Differential Output Voltage,Receiver Buffer Common Mode Voltage,Strict Preservation
+R6_audio[10],Output,PIN_AD26,5A,B5A_N0,PIN_AD26,2.5 V,,,,,,,,,,,,,
+R6_audio[9],Output,PIN_AF28,4A,B4A_N0,PIN_AF28,2.5 V,,,,,,,,,,,,,
+R6_audio[8],Output,PIN_AF27,4A,B4A_N0,PIN_AF27,2.5 V,,,,,,,,,,,,,
+R6_audio[7],Output,PIN_AH27,4A,B4A_N0,PIN_AH27,2.5 V,,,,,,,,,,,,,
+R6_audio[6],Output,PIN_AH26,4A,B4A_N0,PIN_AH26,2.5 V,,,,,,,,,,,,,
+R6_audio[5],Output,PIN_AF25,4A,B4A_N0,PIN_AF25,2.5 V,,,,,,,,,,,,,
+R6_audio[4],Output,PIN_AF23,4A,B4A_N0,PIN_AF23,2.5 V,,,,,,,,,,,,,
+R6_audio[3],Output,PIN_AH22,4A,B4A_N0,PIN_AH22,2.5 V,,,,,,,,,,,,,
+R6_audio[2],Output,PIN_AG21,4A,B4A_N0,PIN_AG21,2.5 V,,,,,,,,,,,,,
+R6_audio[1],Output,PIN_AA20,5A,B5A_N0,PIN_AA20,2.5 V,,,,,,,,,,,,,
+R6_audio[0],Output,PIN_AE22,4A,B4A_N0,PIN_AE22,2.5 V,,,,,,,,,,,,,
+R13_flag,Input,PIN_W20,5B,B5B_N0,PIN_W20,2.5 V,,,,,,,,,,,,,
+R13_flag_out,Output,PIN_W15,5A,B5A_N0,PIN_W15,2.5 V,,,,,,,,,,,,,
+R14_flag,Output,PIN_AC24,5A,B5A_N0,PIN_AC24,2.5 V,,,,,,,,,,,,,
+clkFPGA,Input,PIN_V11,3B,B3B_N0,PIN_V11,2.5 V,,,,,,,,,,,,,
+rst,Input,PIN_AH16,4A,B4A_N0,PIN_AH16,2.5 V,,,,,,,,,,,,,

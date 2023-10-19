@@ -1,7 +1,8 @@
-module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, output logic R14_flag, output logic R13_flag_out);
+module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, output logic R14_flag, output logic R13_flag_out, output logic finish);
 
 	//IF
 	logic [31:0] pc_in_if, pc_out_if, pc_plus1_if, instruction_if;
+
 	
 	//ID
 	logic [31:0] pc_id, extend_out_id, RD1_id, RD2_id, RD3_id;
@@ -14,6 +15,7 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 	logic [1:0] instr_31_30_id, ImmSr_id;
 	logic BranchB_id, BranchI_id, BranchGEQ_id, BranchLEQ_id, RegDtn_id, MemToReg_id, MemRead_id, MemWrite_id,
 			ALUSrc_id, RegWrite_id, RegSrc2_id, RegSrc1_id, R14_flag_temp, R13_flag_out_temp;
+	logic finish_temp;
 	
 	//EX
 	logic [31:0] pc_plus_imm_ex, pc_ex, alu_op2_ex, alu_out_ex, RD1_ex, RD2_ex, RD3_ex, extend_ex;
@@ -24,8 +26,9 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 			BranchB_ex, BranchI_ex, BranchGEQ_ex, BranchLEQ_ex;
 	
 	//MEM
-	logic [31:0] alu_out_mem, RD3_WD_mem, data_out_mem;
+	logic [31:0] alu_out_mem, RD3_WD_mem, data_out_mem, dir_mem;
 	logic [3:0] RA3_mem;
+	logic [15:0] mem_out;
 	logic MemRead_mem, MemWrite_mem, RegWrite_mem, MemToReg_mem;
 	
 	 
@@ -39,8 +42,8 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 	// Instantiating modules
 	
 	//clks
-	new_clk #(.frec(2)) frec_mem (clk_mem, clkFPGA);
-	new_clk #(.frec(8)) frec_clk (clk, clkFPGA);
+	new_clk #(.frec(200)) frec_mem (clk_mem, clkFPGA);
+	new_clk #(.frec(2825)) frec_clk (clk, clkFPGA);
 
 
 	// IF
@@ -65,7 +68,7 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 	extend extend_id (instr_27_0_id, ImmSr_id, extend_out_id);
 
 	// instr_24_21_id = RA3_id
-	regfile regfile_id (RA1_id, RA2_id, instr_24_21_id, RA3_wb, data_mux_wb, R13_flag, RegWrite_wb, clk, rst, RD1_id, RD2_id, RD3_id, R6_audio_temp, R14_flag_temp, R13_flag_out_temp);
+	regfile regfile_id (RA1_id, RA2_id, instr_24_21_id, RA3_wb, data_mux_wb, R13_flag, RegWrite_wb, clk, rst, RD1_id, RD2_id, RD3_id, R6_audio_temp, R14_flag_temp, R13_flag_out_temp, finish_temp);
 
 	// ID/EX Segmentation
 	segment_id_ex id_ex (BranchB_id, BranchI_id, BranchGEQ_id, BranchLEQ_id, clk, rst, MemToReg_id, MemRead_id, MemWrite_id, ALUOp_id, ALUSrc_id, RegWrite_id,
@@ -80,26 +83,30 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 	alu alu_ex (RD1_ex, alu_op2_ex, ALUOp_ex, alu_out_ex, flagZ_ex, flagN_ex);
 	jump_unit jump_unit_ex (flagZ_ex, flagN_ex, BranchB_ex, BranchI_ex, BranchGEQ_ex, BranchLEQ_ex, PCSource_out_ex);
 
-	// EX/MEM Segmentation
+	// EX/MEM Segmentation 
 	segment_ex_mem ex_mem (clk, rst, MemToReg_ex, MemRead_ex, MemWrite_ex, RegWrite_ex,
 						   alu_out_ex, RD3_ex, RA3_ex,
 						   MemToReg_mem, MemRead_mem, MemWrite_mem, RegWrite_mem,
 						   alu_out_mem, RD3_WD_mem, RA3_mem);
 
 	// MEM
-	ram mem(.address(alu_out_mem[15:0]), .clock(clk_mem), .data(RD3_WD_mem), .wren(MemWrite_mem), .q(data_out_mem)); 
+	compare compare_mem (alu_out_mem, dir_mem);
+	ram257 mem(.address(dir_mem[17:0]), .clock(clk_mem), .data(RD3_WD_mem[15:0]), .wren(MemWrite_mem), .q(mem_out)); 
 
+	extend_mem extend_1(mem_out, data_out_mem);
+	
 	// MEM/WB Segmentation
 	segment_mem_wb mem_wb (clk, rst, MemToReg_mem, RegWrite_mem, 
 					data_out_mem, alu_out_mem, RA3_mem,
 					MemToReg_wb, RegWrite_wb, data_out_wb, alu_out_wb, RA3_wb);
 
 	// WB
-	mux_2to1 #(.N(32)) mux_2to1_wb (alu_out_wb, data_out_wb, MemToReg_wb, data_mux_wb); //TODO: data_mux_id debería estar conectado a regfile
+	mux_2to1 #(.N(32)) mux_2to1_wb (alu_out_wb, data_out_wb, MemToReg_wb, data_mux_wb);
 	
 	
 	assign R6_audio = R6_audio_temp;
 	assign R14_flag = R14_flag_temp;
 	assign R13_flag_out = R13_flag_out_temp;
+	assign finish = finish_temp;
 
 endmodule
