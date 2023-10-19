@@ -27,13 +27,14 @@ def generate_audio_file():
                 data.append(str(board.digital_read(i+3)[0]))
             final_audio.append(data)
             is_processing += 1
+            print(is_processing)
         flag_last_state  = flag_current_state  
     return final_audio
 
 def main():
     print("Starting process...")
-    filename = time.strftime("%Y_%m_%d__%I_%M_%S_%p") + ".txt"
     audio = generate_audio_file()   
+    filename = time.strftime("%Y_%m_%d__%I_%M_%S_%p") + ".txt"
     with open(filename, "a+" ) as f:
         for data in audio:
             audio_string = ''.join(data)

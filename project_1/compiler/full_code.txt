@@ -7,7 +7,7 @@ _start:
 	sumita r12,r15,0
     brinco _loop
 _loop:
-	sumita r14,r15,r15
+	suma r14,r15,r15
 	sumita r1,r15,0
 	cargar r3,0(r1)
 	sumita r1,r15,1604 
@@ -131,7 +131,7 @@ _startD:
 	sumita r12,r15,0
     brinco _loopD
 _loopD:
-	sumita r14,r15,r15
+	suma r14,r15,r15
 	sumita r1,r15,65535 
 	sumita r1,r1,64069
     suma r1,r1,r12

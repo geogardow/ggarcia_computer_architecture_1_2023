@@ -42,8 +42,8 @@ module datapath (input clkFPGA, rst, R13_flag, output logic [10:0] R6_audio, out
 	// Instantiating modules
 	
 	//clks
-	new_clk #(.frec(2)) frec_mem (clk_mem, clkFPGA);
-	new_clk #(.frec(2)) frec_clk (clk, clkFPGA);
+	new_clk #(.frec(200)) frec_mem (clk_mem, clkFPGA);
+	new_clk #(.frec(2825)) frec_clk (clk, clkFPGA);
 
 
 	// IF
