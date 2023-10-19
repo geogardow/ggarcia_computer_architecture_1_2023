@@ -992,19 +992,21 @@ registerDictionary = {
     "r15": "1111"
 }
 
-script_file_path = 'full_code.txt'
+folder_path = "./project_1/compiler/"
+
+script_file_path = folder_path + 'full_code.txt'
 
 remove_blank_lines_from_file(script_file_path)
 
-instructionElementsList = getinstructionElementsList('full_code.txt')
+instructionElementsList = getinstructionElementsList(folder_path + 'full_code.txt')
 
 instructionElementsList = riskControlUnit(instructionElementsList, typeDictionary, opcodeDictionary)
 
 labelDictionary, instructionElementsList = getLabelDictionary(instructionElementsList)
 
-binaryInstructions('binaryCode.txt', instructionElementsList, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
+binaryInstructions(folder_path + 'binaryCode.txt', instructionElementsList, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
 
-input_file = 'BinaryCode.txt'
-output_file = 'output.mif'
+input_file = folder_path + 'BinaryCode.txt'
+output_file = folder_path + 'output.mif'
 
 convert_to_mif(input_file, output_file)

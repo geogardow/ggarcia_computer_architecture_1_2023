@@ -2,13 +2,13 @@ import wave
 import array
 
 
-def create_audio(audio_data):
+def create_audio(audio_data, path):
 
     sample_width = 2  # 8 bytes (64-bit)
     num_channels = 1  # Mono audio
     sample_rate = 32000 
 
-    with wave.open("script0_miercoles_prueba2.wav", "w") as wf:
+    with wave.open(path, "w") as wf:
         wf.setnchannels(num_channels)
         wf.setsampwidth(sample_width)
         wf.setframerate(sample_rate)
@@ -46,12 +46,13 @@ def q19_to_decimal(list_values):
     return result
 
 
-
-file_name = 'script0_miercoles_prueba2.txt'
+folder_path = "./project_1/post_process/"
+file_name = folder_path + 'script0_jueves_prueba1.txt'
+audio_path = folder_path + 'script0_jueves_prueba1.wav'
 
 values = file_to_list(file_name)
 q19_valules = q19_to_decimal(values)
-create_audio(q19_valules)
+create_audio(q19_valules, audio_path)
 
 #print('Values in the list [1129:1139]:', values[1129:1139])
 #print('Total number of values:', len(q19_valules))
