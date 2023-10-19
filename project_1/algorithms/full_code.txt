@@ -356,6 +356,7 @@ _preStoreD:
 
 _storeValueD:
 	sumita r14,r14,1
+	suma r14,r15,r15
     sumita r0,r15,1600	
 	geq r9,r0,_giveSpaceD
 	
