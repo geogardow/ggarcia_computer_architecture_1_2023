@@ -15,6 +15,7 @@ def create_audio(audio_data):
 
         # Convert and write the audio data to the file
         audio_array = array.array('h', [int(x * 32767) for x in audio_data])  # Scale to 16-bit range
+        #print(audio_array)
         wf.writeframes(audio_array.tobytes())
     print("WAV file created successfully.")
 
@@ -46,7 +47,7 @@ def q19_to_decimal(list_values):
 
 
 
-file_name = 'audio_prueba2.txt'
+file_name = './project_1/post_process/audio_prueba2.txt'
 
 values = file_to_list(file_name)
 q19_valules = q19_to_decimal(values)
