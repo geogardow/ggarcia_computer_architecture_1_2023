@@ -131,11 +131,10 @@ _adjust:
 
 
 _storeValue:
-	sumita r14,r14,1
-	suma r14,r15,r15
 	sumita r0,r15,1600	
 	geq r9,r0,_giveSpace
-	
+	sumita r14,r15,1
+
 	sumita r1,r15,2 //inPointer
 	cargar r10,0(r1)
 	sumita r8,r15,4 //buffer
@@ -355,11 +354,10 @@ _preStoreD:
     brinco _storeValueD
 
 _storeValueD:
-	sumita r14,r14,1
-	suma r14,r15,r15
     sumita r0,r15,1600	
 	geq r9,r0,_giveSpaceD
-	
+	sumita r14,r15,1
+
 	sumita r1,r15,2 //inPointer
 	cargar r10,0(r1)
 	sumita r8,r15,4 //buffer
