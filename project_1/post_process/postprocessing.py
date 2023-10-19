@@ -8,7 +8,7 @@ def create_audio(audio_data):
     num_channels = 1  # Mono audio
     sample_rate = 32000 
 
-    with wave.open("script1_prueba1.wav", "w") as wf:
+    with wave.open("script0_miercoles_prueba2.wav", "w") as wf:
         wf.setnchannels(num_channels)
         wf.setsampwidth(sample_width)
         wf.setframerate(sample_rate)
@@ -47,7 +47,7 @@ def q19_to_decimal(list_values):
 
 
 
-file_name = 'script1_prueba.txt'
+file_name = 'script0_miercoles_prueba2.txt'
 
 values = file_to_list(file_name)
 q19_valules = q19_to_decimal(values)
