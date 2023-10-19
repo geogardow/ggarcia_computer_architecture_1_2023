@@ -38,17 +38,7 @@ initial begin
 	rst = 1'b1;
 	#1;
 	rst = 1'b0;
-	#200
-
-	// Este cambio no modifica el codigo 
-	R13_flag = 1'b0;
-
-	#200
-	// Se hace un reset, entonces el codigo salta a la etiqueta end 
-	#1;
-	rst = 1'b1;
-	#1;
-	rst = 1'b0;
+	#200;
 
 
 
