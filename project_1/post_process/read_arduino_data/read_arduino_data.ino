@@ -33,12 +33,8 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Starting process...");
-  
- 
   int flag_last_state = LOW;
-  int is_processing = 0;
-  while (is_processing < 128000) {
+  while (true) {
     int flag_current_state = digitalRead(FLAG_PIN);
     if (flag_current_state == HIGH && flag_last_state == LOW) {
       String audio_string;
@@ -46,12 +42,9 @@ void loop() {
         audio_string += String(digitalRead(i + 3));
       }
       Serial.println(audio_string);
-      is_processing++;
     }
     flag_last_state = flag_current_state;
   }
- 
-    Serial.println("Process done!");
   } 
   
 
