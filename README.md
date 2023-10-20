@@ -1,1 +1,1 @@
-# ggarcia_computer_architecture_1_2023
+# Diseño e Implementación de un ASIP para reverberación de audio
