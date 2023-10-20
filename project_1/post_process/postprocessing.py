@@ -47,8 +47,8 @@ def q19_to_decimal(list_values):
 
 
 folder_path = "./project_1/post_process/"
-file_name = folder_path + 'script0_jueves_prueba2.txt'
-audio_path = folder_path + 'script0_jueves_prueba2.wav'
+file_name = folder_path + 'script0_improve2.txt'
+audio_path = folder_path + 'script0_improve2.wav'
 
 values = file_to_list(file_name)
 q19_valules = q19_to_decimal(values)
